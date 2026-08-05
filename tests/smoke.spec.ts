@@ -60,6 +60,7 @@ test("hero background selection exposes six variants and persists", async ({ pag
 
   await expect(page.locator("html")).toHaveAttribute("data-background", "openwall");
   await expect(page.locator(".hero-home__image")).toHaveCSS("background-image", /hero-roses-open-wall-v2\.jpg/);
+  await expect(page.locator(".booking-panel__texture")).toHaveCSS("background-image", /hero-roses-open-wall-v2\.jpg/);
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-background", "openwall");
 });

@@ -17,6 +17,38 @@
   --plum-900: #1b0c18;
   --plum-800: #2a1224;
   --plum-700: #451b38;
+  --selected-bg-image: url("/images/hero-roses-v2.jpg");
+  --selected-bg-position: center right;
+}
+
+html[data-background="bouquet"] {
+  --selected-bg-image: url("/images/hero-roses-bouquet-v2.jpg");
+  --selected-bg-position: center right;
+}
+
+html[data-background="wall"] {
+  --selected-bg-image: url("/images/hero-roses-v2.jpg");
+  --selected-bg-position: center right;
+}
+
+html[data-background="purple"] {
+  --selected-bg-image: url("/images/hero-roses-purple-v2.jpg");
+  --selected-bg-position: center;
+}
+
+html[data-background="closeup"] {
+  --selected-bg-image: url("/images/hero-roses-closeup-v2.jpg");
+  --selected-bg-position: center right;
+}
+
+html[data-background="editorial"] {
+  --selected-bg-image: url("/images/hero-roses-editorial.jpg");
+  --selected-bg-position: center;
+}
+
+html[data-background="openwall"] {
+  --selected-bg-image: url("/images/hero-roses-open-wall-v2.jpg");
+  --selected-bg-position: center;
 }
 
 html[data-theme="dark"] {
@@ -589,42 +621,12 @@ html[data-theme="light"] .theme-toggle__thumb {
 .hero-home__image {
   position: absolute;
   inset: 0;
-  background-image: url("/images/hero-roses-v2.jpg");
-  background-position: center right;
+  background-image: var(--selected-bg-image);
+  background-position: var(--selected-bg-position);
   background-size: cover;
   animation: rose-drift 18s ease-in-out infinite alternate;
   opacity: 0.97;
   transform: scale(1.04);
-}
-
-html[data-background="bouquet"] .hero-home__image {
-  background-image: url("/images/hero-roses-bouquet-v2.jpg");
-  background-position: center right;
-}
-
-html[data-background="wall"] .hero-home__image {
-  background-image: url("/images/hero-roses-v2.jpg");
-  background-position: center right;
-}
-
-html[data-background="purple"] .hero-home__image {
-  background-image: url("/images/hero-roses-purple-v2.jpg");
-  background-position: center;
-}
-
-html[data-background="closeup"] .hero-home__image {
-  background-image: url("/images/hero-roses-closeup-v2.jpg");
-  background-position: center right;
-}
-
-html[data-background="editorial"] .hero-home__image {
-  background-image: url("/images/hero-roses-editorial.jpg");
-  background-position: center;
-}
-
-html[data-background="openwall"] .hero-home__image {
-  background-image: url("/images/hero-roses-open-wall-v2.jpg");
-  background-position: center;
 }
 
 .hero-home__veil {
@@ -1025,10 +1027,13 @@ html[data-background="openwall"] .hero-home__image {
 .booking-panel__texture {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, rgba(47, 9, 37, 0.98), rgba(57, 11, 43, 0.65) 55%, rgba(39, 7, 30, 0.2)),
-    url("/images/hero-roses-v2.jpg") center right / cover;
+  background-image:
+    linear-gradient(90deg, rgba(47, 9, 37, 0.98), rgba(57, 11, 43, 0.68) 55%, rgba(39, 7, 30, 0.24)),
+    var(--selected-bg-image);
+  background-position: center, var(--selected-bg-position);
+  background-size: auto, cover;
   opacity: 0.78;
+  transition: background-image 0.3s ease;
 }
 
 .booking-panel::after {
