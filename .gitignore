@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+playwright-report
+test-results
+.env*
+!.env.example
+.DS_Store
+*.tsbuildinfo
+
+# Non-live ImageGen review candidates
+public/images/*-candidate.jpg
