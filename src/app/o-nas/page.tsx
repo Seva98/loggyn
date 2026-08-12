@@ -10,6 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const societyGroups = ["Česko a mezinárodní", "Německo"] as const;
+
   return (
     <>
       <section className="page-hero page-hero--about">
@@ -114,16 +116,53 @@ export default function AboutPage() {
 
       <section className="section memberships">
         <div className="shell">
-          <Reveal className="section-intro">
-            <p className="eyebrow">Odborné společnosti</p>
-            <h2 className="display-heading">Členství a profesní propojení.</h2>
+          <Reveal className="section-intro section-intro--split">
+            <div>
+              <p className="eyebrow">Odborné společnosti</p>
+              <h2 className="display-heading">Členství a profesní propojení.</h2>
+            </div>
+            <p>
+              Aktivní kontakt s českými, německými i mezinárodními odbornými společnostmi pomáhá přenášet do péče současné poznatky a doporučené postupy.
+            </p>
           </Reveal>
-          <div className="membership-grid">
-            {["Česká společnost", "Německá společnost", "Ultrazvuková společnost", "Odborná platforma"].map((label) => (
-              <div className="membership-placeholder" key={label}>
-                <span aria-hidden="true">L</span>
-                <p>{label}</p>
-                <small>logo a odkaz budou doplněny</small>
+          <div className="membership-groups">
+            {societyGroups.map((group, groupIndex) => (
+              <div className="membership-group" key={group}>
+                <Reveal className="membership-group__heading" delay={groupIndex * 0.04}>
+                  <span aria-hidden="true">0{groupIndex + 1}</span>
+                  <h3>{group}</h3>
+                </Reveal>
+                <div className="membership-grid">
+                  {siteConfig.professionalSocieties
+                    .filter((society) => society.group === group)
+                    .map((society, index) => (
+                      <Reveal delay={(index % 3) * 0.05} key={society.abbreviation}>
+                        <a
+                          className="membership-card"
+                          href={society.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`${society.name} – navštívit oficiální web (otevře se v novém okně)`}
+                        >
+                          <span className="membership-card__logo">
+                            <Image
+                              src={society.logo}
+                              alt={`${society.name} – oficiální logo`}
+                              fill
+                              sizes="(max-width: 640px) 75vw, (max-width: 1120px) 36vw, 25vw"
+                            />
+                          </span>
+                          <span className="membership-card__body">
+                            <span className="membership-card__meta">{society.abbreviation}</span>
+                            <span className="membership-card__name">{society.name}</span>
+                          </span>
+                          <svg className="membership-card__arrow" aria-hidden="true" viewBox="0 0 24 24">
+                            <path d="M6 18 18 6M9 6h9v9" />
+                          </svg>
+                        </a>
+                      </Reveal>
+                    ))}
+                </div>
               </div>
             ))}
           </div>

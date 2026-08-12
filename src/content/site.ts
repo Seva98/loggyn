@@ -39,6 +39,14 @@ export interface CertificationGroup {
   items: Array<{ name: string; detail?: string }>;
 }
 
+export interface ProfessionalSociety {
+  name: string;
+  abbreviation: string;
+  group: "Česko a mezinárodní" | "Německo";
+  url: string;
+  logo: string;
+}
+
 export interface ContactDetails {
   address: string;
   city: string;
@@ -60,6 +68,7 @@ export interface SiteConfig {
   priceGroups: PriceGroup[];
   career: CareerEntry[];
   certifications: CertificationGroup[];
+  professionalSocieties: ProfessionalSociety[];
 }
 
 export const siteConfig: SiteConfig = {
@@ -220,6 +229,71 @@ export const siteConfig: SiteConfig = {
         { name: "Psychosomatická péče v gynekologii" },
         { name: "Humánní genetika" },
       ],
+    },
+  ],
+  professionalSocieties: [
+    {
+      name: "Česká lékařská komora",
+      abbreviation: "ČLK",
+      group: "Česko a mezinárodní",
+      url: "https://www.lkcr.cz/",
+      logo: "/images/societies/lkcr.png",
+    },
+    {
+      name: "Česká komora estetické medicíny",
+      abbreviation: "ČKEM",
+      group: "Česko a mezinárodní",
+      url: "https://www.ckem.cz/",
+      logo: "/images/societies/ckem.png",
+    },
+    {
+      name: "European Society of Aesthetic Gynecology",
+      abbreviation: "ESAG",
+      group: "Česko a mezinárodní",
+      url: "https://esag.org/",
+      logo: "/images/societies/esag.png",
+    },
+    {
+      name: "Bayerische Landesärztekammer",
+      abbreviation: "BLÄK",
+      group: "Německo",
+      url: "https://www.blaek.de/",
+      logo: "/images/societies/blaek.svg",
+    },
+    {
+      name: "Deutsche Gesellschaft für Gynäkologie und Geburtshilfe",
+      abbreviation: "DGGG",
+      group: "Německo",
+      url: "https://www.dggg.de/",
+      logo: "/images/societies/dggg.svg",
+    },
+    {
+      name: "Deutsche Gesellschaft für Ultraschall in der Medizin",
+      abbreviation: "DEGUM",
+      group: "Německo",
+      url: "https://www.degum.de/",
+      logo: "/images/societies/degum.png",
+    },
+    {
+      name: "Arbeitsgemeinschaft Gynäkologische Endoskopie",
+      abbreviation: "AGE",
+      group: "Německo",
+      url: "https://ag-endoskopie.de/",
+      logo: "/images/societies/age.svg",
+    },
+    {
+      name: "Arbeitsgemeinschaft Kinder- und Jugendgynäkologie",
+      abbreviation: "AG KJG",
+      group: "Německo",
+      url: "https://www.kindergynaekologie.de/startseite/",
+      logo: "/images/societies/kindergynaekologie.png",
+    },
+    {
+      name: "Deutsche Menopause Gesellschaft",
+      abbreviation: "DMG",
+      group: "Německo",
+      url: "https://www.menopause-gesellschaft.de/",
+      logo: "/images/societies/menopause.png",
     },
   ],
 };

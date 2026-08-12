@@ -71,6 +71,31 @@ test("pricing contains the detailed masseter item only once", async ({ page }) =
   await expect(page.locator(".price-row")).toHaveCount(19);
 });
 
+test("about page shows all official professional societies", async ({ page }) => {
+  await page.goto("/o-nas");
+
+  const cards = page.locator(".membership-card");
+  await expect(cards).toHaveCount(9);
+  await expect(page.getByRole("heading", { name: "Česko a mezinárodní", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Německo", exact: true })).toBeVisible();
+  for (let index = 0; index < 9; index += 1) {
+    const logo = cards.nth(index).locator("img");
+    await logo.scrollIntoViewIfNeeded();
+    await expect.poll(() => logo.evaluate((image) => (
+      (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0
+    ))).toBe(true);
+  }
+
+  const links = await cards.evaluateAll((elements) => elements.map((element) => ({
+    href: (element as HTMLAnchorElement).href,
+    target: (element as HTMLAnchorElement).target,
+  })));
+
+  expect(links.every(({ target }) => target === "_blank")).toBe(true);
+  expect(links.map(({ href }) => href)).toContain("https://www.degum.de/");
+  expect(links.map(({ href }) => href)).toContain("https://www.menopause-gesellschaft.de/");
+});
+
 test("contact page has actionable details and map", async ({ page }) => {
   await page.goto("/kontakt");
   const main = page.getByRole("main");
