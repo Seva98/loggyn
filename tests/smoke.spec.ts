@@ -39,30 +39,18 @@ test("homepage exposes all nine services and safe booking links", async ({ page 
   await expect(booking).toHaveAttribute("target", "_blank");
 });
 
-test("theme selection persists after reload", async ({ page }) => {
+test("site stays in light mode without a theme switcher", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  await page.getByRole("button", { name: "Přepnout na světlý režim" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  await page.reload();
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await expect(page.locator(".theme-toggle")).toHaveCount(0);
 });
 
-test("hero background selection exposes six variants and persists", async ({ page }) => {
+test("hero uses the fixed fifth background without animation or a switcher", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator("html")).toHaveAttribute("data-background", "wall");
-
-  await page.getByRole("button", { name: /Vybrat pozadí/ }).click();
-  const picker = page.getByRole("dialog", { name: "Výběr pozadí hero sekce" });
-  await expect(picker).toBeVisible();
-  await expect(picker.locator(".background-option")).toHaveCount(6);
-  await picker.getByRole("button", { name: /Vzdušná stěna/ }).click();
-
-  await expect(page.locator("html")).toHaveAttribute("data-background", "openwall");
-  await expect(page.locator(".hero-home__image")).toHaveCSS("background-image", /hero-roses-open-wall-v2\.jpg/);
-  await expect(page.locator(".booking-panel__texture")).toHaveCSS("background-image", /hero-roses-open-wall-v2\.jpg/);
-  await page.reload();
-  await expect(page.locator("html")).toHaveAttribute("data-background", "openwall");
+  await expect(page.locator("html")).toHaveAttribute("data-background", "editorial");
+  await expect(page.locator(".background-switcher")).toHaveCount(0);
+  await expect(page.locator(".hero-home__image")).toHaveCSS("background-image", /hero-roses-editorial\.jpg/);
+  await expect(page.locator(".hero-home__image")).toHaveCSS("animation-name", "none");
 });
 
 test("pricing contains the detailed masseter item only once", async ({ page }) => {

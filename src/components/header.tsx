@@ -6,8 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/content/site";
-import { BackgroundSwitcher } from "@/components/background-switcher";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { IconSwitcher } from "@/components/icon-switcher";
 
 function BookingLink({ compact = false }: { compact?: boolean }) {
   return (
@@ -18,7 +17,6 @@ function BookingLink({ compact = false }: { compact?: boolean }) {
       rel="noreferrer"
     >
       Objednat si termín
-      <span aria-hidden="true">↗</span>
     </a>
   );
 }
@@ -59,8 +57,7 @@ export function Header() {
         </nav>
 
         <div className="site-header__actions">
-          <ThemeToggle />
-          <BackgroundSwitcher />
+          <IconSwitcher />
           <div className="desktop-booking">
             <BookingLink compact />
           </div>

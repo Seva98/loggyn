@@ -11,33 +11,21 @@ export const metadata: Metadata = {
 export default function PricingPage() {
   return (
     <>
-      <section className="page-hero page-hero--simple">
-        <div className="shell simple-hero-grid">
-          <Reveal>
-            <p className="eyebrow eyebrow--light">Transparentní ceny</p>
-            <h1>Ceník péče</h1>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <p>
-              Naše ambulance funguje na principu přímé úhrady. Díky tomu vám můžeme nabídnout více času, soukromí a péči přizpůsobenou vašim potřebám.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
       <section className="section pricing-section">
         <div className="shell pricing-stack">
+          <Reveal>
+            <h1 className="display-heading">Ceník</h1>
+          </Reveal>
           {siteConfig.priceGroups.map((group, groupIndex) => (
             <Reveal className="price-group" key={group.title} delay={groupIndex * 0.06}>
               <div className="price-group__header">
-                <p className="eyebrow">{group.eyebrow}</p>
                 <h2>{group.title}</h2>
                 <p>{group.description}</p>
               </div>
               <div className="price-list" role="table" aria-label={group.title}>
-                {group.items.map((item, index) => (
+                {group.items.map((item) => (
                   <div className="price-row" role="row" key={item.name}>
-                    <span className="price-row__number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="price-row__number" aria-hidden="true">✦</span>
                     <span role="cell" className="price-row__name">{item.name}</span>
                     <strong role="cell" className="price-row__price">{item.price}</strong>
                   </div>

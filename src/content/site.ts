@@ -11,7 +11,6 @@ export type ServiceIconName =
 
 export interface Service {
   title: string;
-  description: string;
   icon: ServiceIconName;
 }
 
@@ -22,7 +21,6 @@ export interface PriceItem {
 
 export interface PriceGroup {
   title: string;
-  eyebrow: string;
   description: string;
   items: PriceItem[];
 }
@@ -76,8 +74,8 @@ export const siteConfig: SiteConfig = {
   legalName: "Loggyn – Logan Gynekologie",
   bookingUrl: "https://reservio.cz/",
   navigation: [
+    { label: "Domovská stránka", href: "/" },
     { label: "O nás", href: "/o-nas" },
-    { label: "Služby naší ordinace", href: "/#sluzby" },
     { label: "Ceník", href: "/cenik" },
     { label: "Kontakt", href: "/kontakt" },
   ],
@@ -88,62 +86,52 @@ export const siteConfig: SiteConfig = {
     email: "ordinace@loggyn.cz",
     phone: "+420 777 123 456",
     phoneHref: "+420777123456",
-    hours: "Po–Pá pouze po objednání",
+    hours: "pouze po objednání",
     mapEmbedUrl:
-      "https://www.google.com/maps?q=Plze%C5%88%2C%20%C4%8Cesko&z=14&output=embed",
-    mapExternalUrl: "https://www.google.com/maps/search/?api=1&query=Plze%C5%88%2C%20%C4%8Cesko",
+      "https://www.google.com/maps?q=R%C5%AF%C5%BEov%C3%A1%2012%2C%20301%2000%20Plze%C5%88&z=16&output=embed",
+    mapExternalUrl: "https://www.google.com/maps/search/?api=1&query=R%C5%AF%C5%BEov%C3%A1%2012%2C%20301%2000%20Plze%C5%88",
   },
   services: [
     {
       title: "Gynekologické vyšetření",
-      description: "Citlivá prevence, diagnostika a prostor pro všechny vaše otázky.",
       icon: "exam",
     },
     {
       title: "Ultrazvuková gynekologická vyšetření",
-      description: "Moderní sonografická diagnostika přímo v ordinaci.",
       icon: "ultrasound",
     },
     {
       title: "Cytologie – LBC",
-      description: "Šetrný odběr a přesná laboratorní metoda prevence.",
       icon: "cytology",
     },
     {
       title: "Antikoncepční poradna",
-      description: "Výběr bezpečného řešení, které respektuje váš život.",
       icon: "contraception",
     },
     {
       title: "Poradna pro ženy v menopauze",
-      description: "Individuální podpora v období hormonálních změn.",
       icon: "menopause",
     },
     {
       title: "První gynekologická návštěva pro dívky",
-      description: "Klidné a bezpečné seznámení s gynekologickou péčí.",
       icon: "firstVisit",
     },
     {
       title: "Sonografie prsu",
-      description: "Neinvazivní ultrazvukové vyšetření prsní tkáně.",
       icon: "breast",
     },
     {
       title: "Aplikace botulotoxinu",
-      description: "Precizní ošetření s důrazem na přirozený výsledek.",
       icon: "botox",
     },
     {
       title: "Aplikace kyseliny hyaluronové",
-      description: "Jemná estetická péče respektující vaši individualitu.",
       icon: "filler",
     },
   ],
   priceGroups: [
     {
       title: "Gynekologická péče",
-      eyebrow: "Konzultace a vyšetření",
       description: "Cena zahrnuje čas lékařky, konzultaci a uvedená vyšetření.",
       items: [
         { name: "Gynekologická konzultace včetně ultrazvukového vyšetření", price: "1 200 Kč" },
@@ -158,7 +146,6 @@ export const siteConfig: SiteConfig = {
     },
     {
       title: "Aplikace botulotoxinu",
-      eyebrow: "Estetická medicína",
       description: "Konkrétní rozsah ošetření vždy doporučíme až po osobní konzultaci.",
       items: [
         { name: "Čelo", price: "3 000 Kč" },

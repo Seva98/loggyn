@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/manrope";
-import "@fontsource/cormorant-garamond/400.css";
-import "@fontsource/cormorant-garamond/500.css";
-import "@fontsource/cormorant-garamond/600.css";
+import "@fontsource/playfair-display/400.css";
+import "@fontsource/playfair-display/500.css";
+import "@fontsource/playfair-display/600.css";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
@@ -30,21 +30,14 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#160b14" },
-    { media: "(prefers-color-scheme: light)", color: "#fff9fc" },
-  ],
+  themeColor: "#fff9fc",
 };
 
-const themeScript = `
+const iconScript = `
   try {
-    var saved = localStorage.getItem('loggyn-theme');
-    var theme = saved === 'light' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = theme;
-    document.documentElement.style.colorScheme = theme;
-    var savedBackground = localStorage.getItem('loggyn-background');
-    var backgrounds = ['bouquet', 'wall', 'purple', 'closeup', 'editorial', 'openwall'];
-    document.documentElement.dataset.background = backgrounds.indexOf(savedBackground) > -1 ? savedBackground : 'wall';
+    var savedIconSet = localStorage.getItem('loggyn-icon-set');
+    var iconSets = ['classic', 'soft', 'fine', 'seal', 'organic', 'bold'];
+    document.documentElement.dataset.iconSet = iconSets.indexOf(savedIconSet) > -1 ? savedIconSet : 'classic';
   } catch (_) {}
 `;
 
@@ -67,9 +60,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   };
 
   return (
-    <html lang="cs" data-theme="dark" data-background="wall" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="cs" data-theme="light" data-background="editorial" data-icon-set="classic" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: iconScript }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </head>
       <body>

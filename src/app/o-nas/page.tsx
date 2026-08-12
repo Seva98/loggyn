@@ -29,15 +29,16 @@ export default function AboutPage() {
             <p>Ilustrační fotografie</p>
           </Reveal>
           <Reveal className="about-hero-copy" delay={0.1}>
-            <p className="eyebrow">O nás</p>
-            <h1>Péče postavená na zkušenosti. A na důvěře.</h1>
+            <h1>MUDr. Aneta Logan</h1>
             <p className="lead">
               Jsem specialistka v oboru gynekologie a porodnictví s více než desetiletou zkušeností z českého a německého zdravotnického prostředí.
             </p>
             <p>
               Po absolvování Lékařské fakulty Univerzity Karlovy v Plzni jsem působila v německých nemocnicích. Stále pracuji v soukromé gynekologické ambulanci v Německu, kde jsem získala cenné zkušenosti s moderní ambulantní péčí a individuálním přístupem k pacientkám.
             </p>
-            <blockquote>„Věřím, že dobrá medicína začíná nasloucháním.“</blockquote>
+            <blockquote>
+              „Věřím, že gynekologická péče není jen o vyšetřeních, ale především o důvěře, otevřené komunikaci a pocitu bezpečí.“
+            </blockquote>
           </Reveal>
         </div>
       </section>
@@ -45,12 +46,11 @@ export default function AboutPage() {
       <section className="section about-story">
         <div className="shell prose-grid">
           <Reveal>
-            <p className="eyebrow">Můj přístup</p>
             <h2 className="display-heading">Odborná medicína s lidskou tváří.</h2>
           </Reveal>
           <Reveal className="prose" delay={0.08}>
             <p>
-              Věřím, že gynekologická péče není jen o vyšetřeních, ale především o důvěře, otevřené komunikaci a pocitu bezpečí. Ve své praxi propojuji odbornou medicínu s lidským přístupem – od první gynekologické návštěvy, prevence a ultrazvukové diagnostiky až po péči v těhotenství, řešení gynekologických obtíží a podporu žen v různých životních obdobích.
+              Ve své praxi propojuji odbornou medicínu s lidským přístupem – od první gynekologické návštěvy, prevence a ultrazvukové diagnostiky až po péči v těhotenství, řešení gynekologických obtíží a podporu žen v různých životních obdobích.
             </p>
             <p>
               Mou odbornou oblastí je zejména ultrazvuková <strong>diagnostika v gynekologii a porodnictví, vyšetření prsu a kolposkopie</strong>, poradenství a nefarmakologická i farmakologická terapie v období <strong>perimenopauzy a menopauzy</strong>. Aktuálně si dále rozšiřuji vzdělání v oblasti <strong>dětské a adolescentní gynekologie v Německu</strong>.
@@ -66,8 +66,7 @@ export default function AboutPage() {
       <section className="section section--timeline">
         <div className="shell">
           <Reveal className="section-intro">
-            <p className="eyebrow">Moje profesní cesta</p>
-            <h2 className="display-heading">Zkušenosti napříč zeměmi i obory.</h2>
+            <h2 className="display-heading">Studium a zkušenosti</h2>
           </Reveal>
           <div className="timeline">
             {siteConfig.career.map((entry, index) => (
@@ -91,8 +90,7 @@ export default function AboutPage() {
         <div className="shell">
           <Reveal className="section-intro section-intro--split">
             <div>
-              <p className="eyebrow">Vzdělávání a certifikace</p>
-              <h2 className="display-heading">Medicína, která se nikdy nepřestává učit.</h2>
+              <h2 className="display-heading">Odborné vzdělávání a certifikace</h2>
             </div>
             <p>Odborné vzdělávání průběžně rozšiřuji v oblastech moderní gynekologické a porodnické péče.</p>
           </Reveal>
@@ -118,7 +116,6 @@ export default function AboutPage() {
         <div className="shell">
           <Reveal className="section-intro section-intro--split">
             <div>
-              <p className="eyebrow">Odborné společnosti</p>
               <h2 className="display-heading">Členství a profesní propojení.</h2>
             </div>
             <p>
@@ -129,7 +126,6 @@ export default function AboutPage() {
             {societyGroups.map((group, groupIndex) => (
               <div className="membership-group" key={group}>
                 <Reveal className="membership-group__heading" delay={groupIndex * 0.04}>
-                  <span aria-hidden="true">0{groupIndex + 1}</span>
                   <h3>{group}</h3>
                 </Reveal>
                 <div className="membership-grid">
@@ -156,9 +152,6 @@ export default function AboutPage() {
                             <span className="membership-card__meta">{society.abbreviation}</span>
                             <span className="membership-card__name">{society.name}</span>
                           </span>
-                          <svg className="membership-card__arrow" aria-hidden="true" viewBox="0 0 24 24">
-                            <path d="M6 18 18 6M9 6h9v9" />
-                          </svg>
                         </a>
                       </Reveal>
                     ))}

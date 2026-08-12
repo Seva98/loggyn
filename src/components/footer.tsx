@@ -9,7 +9,6 @@ export function Footer() {
     <footer className="site-footer">
       <div className="shell footer-grid">
         <div className="footer-column footer-contact">
-          <p className="eyebrow">Kontakty</p>
           <h2>Jsme vám nablízku.</h2>
           <address>
             <span>{siteConfig.contact.address}</span>
@@ -28,7 +27,6 @@ export function Footer() {
         </div>
 
         <div className="footer-column footer-location">
-          <p className="eyebrow">Kde nás najdete</p>
           <div className="mini-map">
             <iframe
               title="Orientační mapa ordinace Loggyn v Plzni"
@@ -38,12 +36,11 @@ export function Footer() {
             />
           </div>
           <a className="text-link" href={siteConfig.contact.mapExternalUrl} target="_blank" rel="noreferrer">
-            Otevřít v Mapách <span aria-hidden="true">↗</span>
+            Otevřít v Mapách
           </a>
         </div>
 
         <div className="footer-column footer-social">
-          <p className="eyebrow">Naše atmosféra</p>
           <div className="social-mosaic" aria-label="Ilustrační fotografie ordinace">
             <div className="social-tile social-tile--photo">
               <Image src="/images/doctor-portrait.png" alt="Ilustrační portrét lékařky" fill sizes="180px" loading="eager" />

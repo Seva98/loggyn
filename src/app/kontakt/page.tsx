@@ -48,23 +48,11 @@ function ContactIcon({ name }: { name: ContactIconName }) {
 export default function ContactPage() {
   return (
     <>
-      <section className="page-hero contact-hero">
-        <div className="shell contact-hero__inner">
-          <Reveal>
-            <p className="eyebrow eyebrow--light">Kontakt</p>
-            <h1>Pojďme najít termín, který vám vyhovuje.</h1>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <p>Nejrychleji si návštěvu rezervujete online. Pro ostatní dotazy jsme vám k dispozici také telefonicky a e-mailem.</p>
-            <a className="button button--light" href={siteConfig.bookingUrl} target="_blank" rel="noreferrer">
-              Rezervace termínu <span aria-hidden="true">↗</span>
-            </a>
-          </Reveal>
-        </div>
-      </section>
-
       <section className="section contact-details">
         <div className="shell">
+          <Reveal className="contact-details__title">
+            <h1 className="display-heading">Kontakt</h1>
+          </Reveal>
           <div className="contact-card-grid">
             {contactCards.map((card, index) => (
               <Reveal className="contact-card" delay={index * 0.05} key={card.label}>
@@ -83,11 +71,10 @@ export default function ContactPage() {
 
           <Reveal className="contact-map" delay={0.08}>
             <div className="contact-map__copy">
-              <p className="eyebrow">Orientační umístění</p>
               <h2>V centru Plzně, na dosah.</h2>
               <p>Uvedené kontaktní údaje i poloha jsou dočasné a před otevřením ordinace budou nahrazeny skutečnými.</p>
               <a className="text-link" href={siteConfig.contact.mapExternalUrl} target="_blank" rel="noreferrer">
-                Otevřít v Mapách <span aria-hidden="true">↗</span>
+                Otevřít v Mapách
               </a>
             </div>
             <iframe

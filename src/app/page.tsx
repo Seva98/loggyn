@@ -6,10 +6,10 @@ import { ServiceIcon } from "@/components/service-icon";
 import { siteConfig } from "@/content/site";
 
 const reasons = [
-  { title: "Odborný lékařský přístup", text: "Péče založená na zkušenostech, současných doporučeních a otevřené komunikaci." },
-  { title: "Moderní terapie", text: "Přirozená, bezpečná a vždy zvolená s respektem k vašim potřebám." },
-  { title: "Individuální a přátelská péče", text: "Dostatek času, klidné prostředí a prostor skutečně se ptát." },
-  { title: "Neustálé vzdělávání", text: "České i zahraniční zkušenosti a nejnovější postupy uváděné citlivě do praxe." },
+  "Odborný lékařský přístup",
+  "Moderní terapie",
+  "Individuální a přátelská péče",
+  "Neustálé vzdělávání",
 ];
 
 export default function HomePage() {
@@ -26,7 +26,7 @@ export default function HomePage() {
               <em>V každé fázi života ženy.</em>
             </h1>
             <a className="button button--hero" href={siteConfig.bookingUrl} target="_blank" rel="noreferrer">
-              Rezervace termínu <span aria-hidden="true">↗</span>
+              Rezervace termínu
             </a>
           </div>
           <a className="scroll-cue" href="#proc-loggyn" aria-label="Přejít k dalšímu obsahu">
@@ -54,20 +54,13 @@ export default function HomePage() {
 
           <div className="why-copy">
             <Reveal>
-              <p className="eyebrow">Proč Loggyn</p>
-              <h2 className="display-heading">Péče, která začíná nasloucháním.</h2>
-              <p className="lead">
-                Odbornost a lidskost pro nás nejsou protiklady. Patří k sobě stejně přirozeně jako důvěra a bezpečí.
-              </p>
+              <h2 className="display-heading">Proč si vybrat nás</h2>
             </Reveal>
             <div className="reason-list">
               {reasons.map((reason, index) => (
-                <Reveal className="reason" delay={index * 0.07} key={reason.title}>
-                  <span className="reason__number">0{index + 1}</span>
-                  <div>
-                    <h3>{reason.title}</h3>
-                    <p>{reason.text}</p>
-                  </div>
+                <Reveal className="reason" delay={index * 0.07} key={reason}>
+                  <span className="reason__mark" aria-hidden="true">✦</span>
+                  <h3>{reason}</h3>
                 </Reveal>
               ))}
             </div>
@@ -77,25 +70,17 @@ export default function HomePage() {
 
       <section id="sluzby" className="section section--services">
         <div className="shell">
-          <Reveal className="section-intro section-intro--split">
+          <Reveal className="section-intro">
             <div>
-              <p className="eyebrow">Služby naší ordinace</p>
-              <h2 className="display-heading">Pro zdraví, jistotu a dobrý pocit.</h2>
+              <h2 className="display-heading">Služby naší ordinace</h2>
             </div>
-            <p>
-              Komplexní ambulantní péče spojující prevenci, moderní diagnostiku a citlivá řešení pro každé životní období.
-            </p>
           </Reveal>
 
           <div className="services-grid">
             {siteConfig.services.map((service, index) => (
               <Reveal className="service-card" delay={(index % 3) * 0.07} key={service.title}>
-                <div className="service-card__top">
-                  <span className="service-card__icon"><ServiceIcon name={service.icon} /></span>
-                  <span className="service-card__index">0{index + 1}</span>
-                </div>
+                <span className="service-card__icon"><ServiceIcon name={service.icon} /></span>
                 <h3>{service.title}</h3>
-                <p>{service.description}</p>
                 <span className="service-card__line" aria-hidden="true" />
               </Reveal>
             ))}
@@ -106,7 +91,6 @@ export default function HomePage() {
       <section className="section section--private-care">
         <div className="shell private-care-grid">
           <Reveal className="private-care-title">
-            <p className="eyebrow">Jiný standard péče</p>
             <h2 className="display-heading">Privátní gynekologická péče</h2>
             <span className="editorial-mark" aria-hidden="true">L</span>
           </Reveal>
@@ -118,7 +102,7 @@ export default function HomePage() {
               Věříme, že dobrá gynekologická péče není jen o samotném vyšetření. Je také o <strong>důvěře, naslouchání a pocitu bezpečí</strong>. Chceme, abyste měla prostor říct, co vás trápí, zeptat se na vše, co potřebujete, a společně s námi najít řešení, které vám bude dávat smysl.
             </p>
             <p>
-              Aktuální ceník našich služeb najdete <Link className="text-link" href="/cenik">zde <span aria-hidden="true">→</span></Link>.
+              Aktuální ceník našich služeb najdete <Link className="text-link" href="/cenik">zde</Link>.
             </p>
           </Reveal>
         </div>
