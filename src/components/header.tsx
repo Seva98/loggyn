@@ -6,7 +6,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/content/site";
-import { IconSwitcher } from "@/components/icon-switcher";
 
 function BookingLink({ compact = false }: { compact?: boolean }) {
   return (
@@ -57,7 +56,6 @@ export function Header() {
         </nav>
 
         <div className="site-header__actions">
-          <IconSwitcher />
           <div className="desktop-booking">
             <BookingLink compact />
           </div>

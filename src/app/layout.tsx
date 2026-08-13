@@ -33,14 +33,6 @@ export const viewport: Viewport = {
   themeColor: "#fff9fc",
 };
 
-const iconScript = `
-  try {
-    var savedIconSet = localStorage.getItem('loggyn-icon-set');
-    var iconSets = ['classic', 'soft', 'fine', 'seal', 'organic', 'bold'];
-    document.documentElement.dataset.iconSet = iconSets.indexOf(savedIconSet) > -1 ? savedIconSet : 'classic';
-  } catch (_) {}
-`;
-
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const structuredData = {
     "@context": "https://schema.org",
@@ -60,9 +52,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   };
 
   return (
-    <html lang="cs" data-theme="light" data-background="editorial" data-icon-set="classic" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="cs" data-theme="light" data-background="editorial" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: iconScript }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </head>
       <body>
