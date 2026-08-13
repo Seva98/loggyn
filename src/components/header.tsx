@@ -42,7 +42,7 @@ export function Header() {
     <header className="site-header">
       <div className="site-header__inner shell">
         <Link className="brand" href="/" aria-label="Loggyn – úvodní stránka">
-          <Image src="/logo-dark.svg" alt="Loggyn" width={719} height={448} priority />
+          <Image src="/logo.svg" alt="Loggyn" width={719} height={448} priority />
         </Link>
 
         <nav className="desktop-nav" aria-label="Hlavní navigace">

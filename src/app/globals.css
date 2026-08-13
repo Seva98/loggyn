@@ -907,6 +907,11 @@ html[data-theme="light"] .theme-toggle__thumb {
   overflow: visible;
 }
 
+.service-icon--image {
+  display: block;
+  object-fit: contain;
+}
+
 .service-icon__set {
   display: none;
   fill: none;

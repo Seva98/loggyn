@@ -2,8 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { BookingCta } from "@/components/booking-cta";
 import { Reveal } from "@/components/reveal";
-import { ServiceIcon } from "@/components/service-icon";
-import { siteConfig } from "@/content/site";
+import { siteConfig, type ServiceIconName } from "@/content/site";
+import botoxIcon from "../../public/images/services/botox.png";
+import breastIcon from "../../public/images/services/breast.png";
+import contraceptionIcon from "../../public/images/services/contraception.png";
+import cytologyIcon from "../../public/images/services/cytology.png";
+import examIcon from "../../public/images/services/exam.png";
+import fillerIcon from "../../public/images/services/filler.png";
+import firstVisitIcon from "../../public/images/services/firstVisit.png";
+import menopauseIcon from "../../public/images/services/menopause.png";
+import ultrasoundIcon from "../../public/images/services/ultrasound.png";
 
 const reasons = [
   "Odborný lékařský přístup",
@@ -11,6 +19,18 @@ const reasons = [
   "Individuální a přátelská péče",
   "Neustálé vzdělávání",
 ];
+
+const serviceIcons = {
+  exam: examIcon,
+  ultrasound: ultrasoundIcon,
+  cytology: cytologyIcon,
+  contraception: contraceptionIcon,
+  menopause: menopauseIcon,
+  firstVisit: firstVisitIcon,
+  breast: breastIcon,
+  botox: botoxIcon,
+  filler: fillerIcon,
+} satisfies Record<ServiceIconName, typeof examIcon>;
 
 export default function HomePage() {
   return (
@@ -79,7 +99,14 @@ export default function HomePage() {
           <div className="services-grid">
             {siteConfig.services.map((service, index) => (
               <Reveal className="service-card" delay={(index % 3) * 0.07} key={service.title}>
-                <span className="service-card__icon"><ServiceIcon name={service.icon} /></span>
+                <span className="service-card__icon">
+                  <Image
+                    className="service-icon service-icon--image"
+                    src={serviceIcons[service.icon]}
+                    sizes="(max-width: 768px) 120px, 150px"
+                    alt=""
+                  />
+                </span>
                 <h3>{service.title}</h3>
                 <span className="service-card__line" aria-hidden="true" />
               </Reveal>
