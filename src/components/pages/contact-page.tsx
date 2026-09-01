@@ -1,21 +1,9 @@
-import type { Metadata } from "next";
 import { BookingCta } from "@/components/booking-cta";
 import { Reveal } from "@/components/reveal";
 import { siteConfig } from "@/content/site";
+import type { Dictionary } from "@/content/types";
 
-export const metadata: Metadata = {
-  title: "Kontakt",
-  description: "Kontakt, ordinační doba a mapa privátní gynekologické ambulance Loggyn v Plzni.",
-};
-
-type ContactIconName = "location" | "phone" | "email" | "hours";
-
-const contactCards: Array<{ label: string; value: string; href?: string; icon: ContactIconName }> = [
-  { label: "Adresa", value: `${siteConfig.contact.address}, ${siteConfig.contact.city}`, href: siteConfig.contact.mapExternalUrl, icon: "location" },
-  { label: "Telefon", value: siteConfig.contact.phone, href: `tel:${siteConfig.contact.phoneHref}`, icon: "phone" },
-  { label: "E-mail", value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}`, icon: "email" },
-  { label: "Ordinační doba", value: siteConfig.contact.hours, icon: "hours" },
-];
+type ContactIconName = "location" | "booking" | "hours";
 
 function ContactIcon({ name }: { name: ContactIconName }) {
   return (
@@ -26,13 +14,10 @@ function ContactIcon({ name }: { name: ContactIconName }) {
           <circle cx="12" cy="10" r="2.4" />
         </>
       )}
-      {name === "phone" && (
-        <path d="M7.1 3.5 9 7.8 6.8 9.5c1.2 2.9 3.8 5.5 6.7 6.7l1.7-2.2 4.3 1.9v2.7c0 1-1 1.9-2 1.8C10 19.8 4.2 14 3.6 6.5c-.1-1 .8-2 1.8-2h1.7Z" />
-      )}
-      {name === "email" && (
+      {name === "booking" && (
         <>
-          <rect x="3" y="5" width="18" height="14" rx="2" />
-          <path d="m4 7 8 6 8-6" />
+          <rect x="3" y="5" width="18" height="16" rx="2" />
+          <path d="M8 3v4M16 3v4M3 10h18M8 15l2.5 2.5L16 13" />
         </>
       )}
       {name === "hours" && (
@@ -45,13 +30,33 @@ function ContactIcon({ name }: { name: ContactIconName }) {
   );
 }
 
-export default function ContactPage() {
+export function ContactPage({ dictionary }: { dictionary: Dictionary }) {
+  const contactCards: Array<{ label: string; value: string; href?: string; icon: ContactIconName }> = [
+    {
+      label: dictionary.contact.labels.address,
+      value: `${siteConfig.contact.address}, ${siteConfig.contact.city}`,
+      href: siteConfig.contact.mapExternalUrl,
+      icon: "location",
+    },
+    {
+      label: dictionary.contact.labels.booking,
+      value: dictionary.contact.bookingViaReservio,
+      href: siteConfig.bookingUrl,
+      icon: "booking",
+    },
+    {
+      label: dictionary.contact.labels.hours,
+      value: dictionary.contact.hours,
+      icon: "hours",
+    },
+  ];
+
   return (
     <>
       <section className="section contact-details">
         <div className="shell">
           <Reveal className="contact-details__title">
-            <h1 className="display-heading">Kontakt</h1>
+            <h1 className="display-heading">{dictionary.contact.title}</h1>
           </Reveal>
           <div className="contact-card-grid">
             {contactCards.map((card, index) => (
@@ -71,14 +76,14 @@ export default function ContactPage() {
 
           <Reveal className="contact-map" delay={0.08}>
             <div className="contact-map__copy">
-              <h2>V centru Plzně, na dosah.</h2>
-              <p>Uvedené kontaktní údaje i poloha jsou dočasné a před otevřením ordinace budou nahrazeny skutečnými.</p>
+              <h2>{dictionary.contact.mapHeading}</h2>
+              <p>{dictionary.contact.temporaryNotice}</p>
               <a className="text-link" href={siteConfig.contact.mapExternalUrl} target="_blank" rel="noreferrer">
-                Otevřít v Mapách
+                {dictionary.contact.openMaps}
               </a>
             </div>
             <iframe
-              title="Orientační poloha ordinace Loggyn v Plzni"
+              title={dictionary.contact.mapTitle}
               src={siteConfig.contact.mapEmbedUrl}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -87,7 +92,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <BookingCta compact />
+      <BookingCta compact dictionary={dictionary} />
     </>
   );
 }

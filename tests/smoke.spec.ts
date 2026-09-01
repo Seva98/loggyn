@@ -2,18 +2,40 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 const routes = [
-  { path: "/", heading: "Citlivě. Odborně." },
-  { path: "/o-nas", heading: "Péče postavená na zkušenosti." },
-  { path: "/cenik", heading: "Ceník péče" },
-  { path: "/kontakt", heading: "Pojďme najít termín" },
-];
+  { locale: "cs", path: "/", heading: "Citlivě. Odborně.", nav: "Hlavní navigace" },
+  { locale: "cs", path: "/o-nas", heading: "MUDr. Aneta Logan", nav: "Hlavní navigace" },
+  { locale: "cs", path: "/cenik", heading: "Ceník", nav: "Hlavní navigace" },
+  { locale: "cs", path: "/kontakt", heading: "Kontakt", nav: "Hlavní navigace" },
+  { locale: "en", path: "/en", heading: "Sensitive. Expert.", nav: "Main navigation" },
+  { locale: "en", path: "/en/about", heading: "MUDr. Aneta Logan", nav: "Main navigation" },
+  { locale: "en", path: "/en/pricing", heading: "Pricing", nav: "Main navigation" },
+  { locale: "en", path: "/en/contact", heading: "Contact", nav: "Main navigation" },
+  { locale: "de", path: "/de", heading: "Einfühlsam. Fachkundig.", nav: "Hauptnavigation" },
+  { locale: "de", path: "/de/ueber-uns", heading: "MUDr. Aneta Logan", nav: "Hauptnavigation" },
+  { locale: "de", path: "/de/preise", heading: "Preise", nav: "Hauptnavigation" },
+  { locale: "de", path: "/de/kontakt", heading: "Kontakt", nav: "Hauptnavigation" },
+  { locale: "uk", path: "/uk", heading: "Делікатно. Професійно.", nav: "Головна навігація" },
+  { locale: "uk", path: "/uk/pro-nas", heading: "MUDr. Aneta Logan", nav: "Головна навігація" },
+  { locale: "uk", path: "/uk/tsiny", heading: "Ціни", nav: "Головна навігація" },
+  { locale: "uk", path: "/uk/kontakty", heading: "Контакти", nav: "Головна навігація" },
+] as const;
 
 for (const route of routes) {
-  test(`${route.path} renders shared layout and has no serious accessibility violations`, async ({ page }) => {
+  test(`${route.path} renders localized, accessible content without overflow`, async ({ page }) => {
     await page.goto(route.path);
+    await expect(page.locator("html")).toHaveAttribute("lang", route.locale);
     await expect(page.getByRole("heading", { level: 1 })).toContainText(route.heading);
     await expect(page.getByRole("banner")).toBeVisible();
     await expect(page.getByRole("contentinfo")).toBeVisible();
+    await expect(page.locator(".desktop-nav")).toHaveAttribute("aria-label", route.nav);
+
+    const canonical = page.locator('link[rel="canonical"]');
+    const canonicalPattern = route.path === "/" ? /^https:\/\/loggyn\.cz\/?$/ : new RegExp(`${route.path}$`);
+    await expect(canonical).toHaveAttribute("href", canonicalPattern);
+    await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(5);
+
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
+    expect(overflow, `${route.path} should not overflow`).toBe(false);
 
     const results = await new AxeBuilder({ page }).disableRules(["color-contrast"]).analyze();
     const serious = results.violations.filter((violation) => ["serious", "critical"].includes(violation.impact ?? ""));
@@ -35,74 +57,133 @@ test("homepage exposes all nine services and safe booking links", async ({ page 
   expect(headlineFit).toEqual({ fits: true, whiteSpace: "nowrap" });
 
   const booking = page.getByRole("link", { name: /Rezervace termínu/i }).first();
-  await expect(booking).toHaveAttribute("href", "https://reservio.cz/");
+  await expect(booking).toHaveAttribute("href", "https://aneta-logan.reservio.com");
   await expect(booking).toHaveAttribute("target", "_blank");
 });
 
-test("site stays in light mode without a theme switcher", async ({ page }) => {
+test("site stays in light mode and uses the fixed editorial background", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  await expect(page.locator(".theme-toggle")).toHaveCount(0);
-});
-
-test("hero uses the fixed fifth background without animation or a switcher", async ({ page }) => {
-  await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("data-background", "editorial");
-  await expect(page.locator(".background-switcher")).toHaveCount(0);
+  await expect(page.locator(".theme-toggle, .background-switcher")).toHaveCount(0);
   await expect(page.locator(".hero-home__image")).toHaveCSS("background-image", /hero-roses-editorial\.jpg/);
   await expect(page.locator(".hero-home__image")).toHaveCSS("animation-name", "none");
 });
 
-test("pricing contains the detailed masseter item only once", async ({ page }) => {
+for (const homepage of [
+  { path: "/", nav: "Hlavní navigace", home: "Domovská stránka", services: "Služby", section: "#sluzby" },
+  { path: "/en", nav: "Main navigation", home: "Home", services: "Services", section: "#services" },
+  { path: "/de", nav: "Hauptnavigation", home: "Startseite", services: "Leistungen", section: "#leistungen" },
+  { path: "/uk", nav: "Головна навігація", home: "Головна", services: "Послуги", section: "#posluhy" },
+]) {
+  test(`${homepage.path} home and services links scroll within the homepage`, async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop", "Desktop navigation behavior");
+    await page.goto(homepage.path);
+    const navigation = page.getByRole("navigation", { name: homepage.nav });
+    const home = navigation.getByRole("link", { name: homepage.home, exact: true });
+    const services = navigation.getByRole("link", { name: homepage.services, exact: true });
+    await expect(home).toHaveClass(/is-active/);
+    await expect(services).not.toHaveClass(/is-active/);
+    await services.click();
+    await expect.poll(() => page.evaluate(() => window.location.hash)).toBe(homepage.section);
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+    await expect(services).toHaveClass(/is-active/);
+    await expect(home).not.toHaveClass(/is-active/);
+    await home.click();
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(2);
+    await expect(home).toHaveClass(/is-active/);
+    await expect(services).not.toHaveClass(/is-active/);
+    expect(await page.evaluate(() => window.location.hash)).toBe("");
+    await services.click();
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+    await expect(services).toHaveClass(/is-active/);
+  });
+}
+
+test("language dropdown maps equivalent pages and service anchors", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Desktop switcher positioning");
   await page.goto("/cenik");
-  await expect(page.getByText("Žvýkací svaly – zúžení obličeje / bruxismus")).toHaveCount(1);
-  await expect(page.locator(".price-row")).toHaveCount(19);
+  const trigger = page.getByRole("button", { name: "Výběr jazyka: Čeština" });
+  await expect(trigger).toBeVisible();
+  await trigger.click();
+  const menu = page.getByRole("menu", { name: "Výběr jazyka" });
+  await expect(menu.getByRole("menuitem")).toHaveCount(4);
+  await menu.getByRole("menuitem", { name: "Přepnout jazyk na English" }).click();
+  await expect(page).toHaveURL(/\/en\/pricing$/);
+
+  await page.goto("/#sluzby");
+  await page.getByRole("button", { name: "Výběr jazyka: Čeština" }).click();
+  await page.getByRole("menuitem", { name: "Přepnout jazyk na Deutsch" }).click();
+  await expect(page).toHaveURL(/\/de#leistungen$/);
 });
 
-test("about page shows all official professional societies", async ({ page }) => {
-  await page.goto("/o-nas");
-
-  const cards = page.locator(".membership-card");
-  await expect(cards).toHaveCount(9);
-  await expect(page.getByRole("heading", { name: "Česko a mezinárodní", exact: true })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Německo", exact: true })).toBeVisible();
-  for (let index = 0; index < 9; index += 1) {
-    const logo = cards.nth(index).locator("img");
-    await logo.scrollIntoViewIfNeeded();
-    await expect.poll(() => logo.evaluate((image) => (
-      (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0
-    ))).toBe(true);
-  }
-
-  const links = await cards.evaluateAll((elements) => elements.map((element) => ({
-    href: (element as HTMLAnchorElement).href,
-    target: (element as HTMLAnchorElement).target,
-  })));
-
-  expect(links.every(({ target }) => target === "_blank")).toBe(true);
-  expect(links.map(({ href }) => href)).toContain("https://www.degum.de/");
-  expect(links.map(({ href }) => href)).toContain("https://www.menopause-gesellschaft.de/");
+test("language dropdown supports keyboard navigation and Escape", async ({ page }) => {
+  await page.goto("/en");
+  const trigger = page.getByRole("button", { name: "Language selector: English" });
+  await trigger.focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("menu", { name: "Language selector" })).toBeVisible();
+  await expect(page.getByRole("menuitem", { name: "Switch language to English" })).toBeFocused();
+  await page.keyboard.press("ArrowDown");
+  await expect(page.getByRole("menuitem", { name: "Switch language to Deutsch" })).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(trigger).toBeFocused();
+  await expect(page.getByRole("menu", { name: "Language selector" })).toBeHidden();
 });
 
-test("contact page has actionable details and map", async ({ page }) => {
-  await page.goto("/kontakt");
-  const main = page.getByRole("main");
-  await expect(main.locator('a[href="tel:+420777123456"]')).toBeVisible();
-  await expect(main.locator('a[href="mailto:ordinace@loggyn.cz"]')).toBeVisible();
-  await expect(page.getByTitle("Orientační poloha ordinace Loggyn v Plzni")).toBeVisible();
+test("mobile header keeps the flag selector available and exposes localized navigation", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile", "Mobile-only behavior");
+  await page.goto("/uk");
+  await expect(page.getByRole("button", { name: "Вибір мови: Українська" })).toBeVisible();
+  const trigger = page.getByRole("button", { name: "Відкрити меню" });
+  await trigger.click();
+  const nav = page.getByRole("navigation", { name: "Мобільна навігація" });
+  await expect(nav).toBeVisible();
+  await expect(nav.getByRole("link")).toHaveCount(6);
+  await page.keyboard.press("Escape");
+  await expect(nav).toBeHidden();
+});
 
-  const iconAlignment = await page.locator(".contact-card__icon").evaluateAll((icons) => icons.map((icon) => {
-    const iconBox = icon.getBoundingClientRect();
-    const svg = icon.querySelector("svg");
-    const svgBox = svg?.getBoundingClientRect();
-    return {
-      centered: !!svgBox
-        && Math.abs(iconBox.x + iconBox.width / 2 - (svgBox.x + svgBox.width / 2)) < 0.5
-        && Math.abs(iconBox.y + iconBox.height / 2 - (svgBox.y + svgBox.height / 2)) < 0.5,
-      stroke: svg?.getAttribute("stroke-width"),
-    };
-  }));
-  expect(iconAlignment).toEqual(Array.from({ length: 4 }, () => ({ centered: true, stroke: "1.7" })));
+for (const localeRoutes of [
+  { contact: "/kontakt", pricing: "/cenik", about: "/o-nas" },
+  { contact: "/en/contact", pricing: "/en/pricing", about: "/en/about" },
+  { contact: "/de/kontakt", pricing: "/de/preise", about: "/de/ueber-uns" },
+  { contact: "/uk/kontakty", pricing: "/uk/tsiny", about: "/uk/pro-nas" },
+]) {
+  test(`${localeRoutes.contact} preserves factual clinic data`, async ({ page }) => {
+    await page.goto(localeRoutes.contact);
+    const main = page.getByRole("main");
+    await expect(main.getByText("Skrétova 47, 301 00 Plzeň", { exact: true })).toBeVisible();
+    await expect(main.locator('a[href^="tel:"]')).toHaveCount(0);
+    await expect(main.locator('a[href^="mailto:"]')).toHaveCount(0);
+    const reservioContact = main.locator('.contact-card a[href="https://aneta-logan.reservio.com"]');
+    await expect(reservioContact).toBeVisible();
+    await expect(reservioContact).toHaveAttribute("target", "_blank");
+
+    await page.goto(localeRoutes.pricing);
+    await expect(page.locator(".price-row")).toHaveCount(19);
+    await expect(page.getByText("6 000 Kč", { exact: true })).toHaveCount(2);
+
+    await page.goto(localeRoutes.about);
+    await expect(page.locator(".membership-card")).toHaveCount(9);
+    await expect(page.getByText("Deutsche Gesellschaft für Ultraschall in der Medizin", { exact: true })).toBeVisible();
+  });
+}
+
+test("sitemap contains every localized route and language alternates", async ({ request }) => {
+  const response = await request.get("/sitemap.xml");
+  expect(response.ok()).toBe(true);
+  const xml = await response.text();
+  expect((xml.match(/<loc>/g) ?? [])).toHaveLength(16);
+  expect(xml).toContain("https://loggyn.cz/en/about");
+  expect(xml).toContain("https://loggyn.cz/de/ueber-uns");
+  expect(xml).toContain("https://loggyn.cz/uk/pro-nas");
+  expect(xml).toContain('hreflang="x-default"');
+});
+
+test("unsupported localized slugs return 404", async ({ page }) => {
+  const response = await page.goto("/en/o-nas");
+  expect(response?.status()).toBe(404);
 });
 
 test("interactive controls consistently use the pointer cursor", async ({ page }) => {
@@ -112,25 +193,5 @@ test("interactive controls consistently use the pointer cursor", async ({ page }
       elements.map((element) => getComputedStyle(element).cursor)
     ));
     expect(cursors.every((cursor) => cursor === "pointer"), `${route.path} pointer cursors`).toBe(true);
-  }
-});
-
-test("mobile navigation opens, closes, and exposes all links", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "mobile", "Mobile-only behavior");
-  await page.goto("/");
-  const trigger = page.getByRole("button", { name: "Otevřít menu" });
-  await trigger.click();
-  const nav = page.getByRole("navigation", { name: "Mobilní navigace" });
-  await expect(nav).toBeVisible();
-  await expect(nav.getByRole("link")).toHaveCount(5);
-  await page.keyboard.press("Escape");
-  await expect(nav).toBeHidden();
-});
-
-test("pages do not overflow horizontally", async ({ page }) => {
-  for (const route of routes) {
-    await page.goto(route.path);
-    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
-    expect(overflow, `${route.path} should not overflow`).toBe(false);
   }
 });

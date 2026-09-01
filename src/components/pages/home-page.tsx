@@ -1,24 +1,19 @@
 import Image from "next/image";
-import Link from "next/link";
 import { BookingCta } from "@/components/booking-cta";
+import { LocalizedRichText } from "@/components/localized-rich-text";
 import { Reveal } from "@/components/reveal";
-import { siteConfig, type ServiceIconName } from "@/content/site";
-import botoxIcon from "../../public/images/services/botox.png";
-import breastIcon from "../../public/images/services/breast.png";
-import contraceptionIcon from "../../public/images/services/contraception.png";
-import cytologyIcon from "../../public/images/services/cytology.png";
-import examIcon from "../../public/images/services/exam.png";
-import fillerIcon from "../../public/images/services/filler.png";
-import firstVisitIcon from "../../public/images/services/firstVisit.png";
-import menopauseIcon from "../../public/images/services/menopause.png";
-import ultrasoundIcon from "../../public/images/services/ultrasound.png";
-
-const reasons = [
-  "Odborný lékařský přístup",
-  "Moderní terapie",
-  "Individuální a přátelská péče",
-  "Neustálé vzdělávání",
-];
+import { serviceDefinitions, siteConfig, type ServiceIconName } from "@/content/site";
+import type { Dictionary, Locale } from "@/content/types";
+import { serviceSectionIds } from "@/i18n/routing";
+import botoxIcon from "../../../public/images/services/botox.png";
+import breastIcon from "../../../public/images/services/breast.png";
+import contraceptionIcon from "../../../public/images/services/contraception.png";
+import cytologyIcon from "../../../public/images/services/cytology.png";
+import examIcon from "../../../public/images/services/exam.png";
+import fillerIcon from "../../../public/images/services/filler.png";
+import firstVisitIcon from "../../../public/images/services/firstVisit.png";
+import menopauseIcon from "../../../public/images/services/menopause.png";
+import ultrasoundIcon from "../../../public/images/services/ultrasound.png";
 
 const serviceIcons = {
   exam: examIcon,
@@ -32,7 +27,7 @@ const serviceIcons = {
   filler: fillerIcon,
 } satisfies Record<ServiceIconName, typeof examIcon>;
 
-export default function HomePage() {
+export function HomePage({ locale, dictionary }: { locale: Locale; dictionary: Dictionary }) {
   return (
     <>
       <section className="hero-home">
@@ -40,44 +35,44 @@ export default function HomePage() {
         <div className="hero-home__veil" aria-hidden="true" />
         <div className="shell hero-home__content">
           <div className="hero-home__copy">
-            <p className="hero-kicker">Privátní gynekologická péče</p>
+            <p className="hero-kicker">{dictionary.home.heroKicker}</p>
             <h1>
-              <span>Citlivě. Odborně. Přirozeně.</span>
-              <em>V každé fázi života ženy.</em>
+              <span>{dictionary.home.heroTitle}</span>
+              <em>{dictionary.home.heroSubtitle}</em>
             </h1>
             <a className="button button--hero" href={siteConfig.bookingUrl} target="_blank" rel="noreferrer">
-              Rezervace termínu
+              {dictionary.home.heroBooking}
             </a>
           </div>
-          <a className="scroll-cue" href="#proc-loggyn" aria-label="Přejít k dalšímu obsahu">
-            <span>Objevte Loggyn</span>
+          <a className="scroll-cue" href="#why-loggyn" aria-label={dictionary.home.discoverLabel}>
+            <span>{dictionary.home.discover}</span>
             <i aria-hidden="true" />
           </a>
         </div>
       </section>
 
-      <section id="proc-loggyn" className="section section--why">
+      <section id="why-loggyn" className="section section--why">
         <div className="shell why-grid">
           <Reveal className="doctor-card">
             <div className="doctor-card__halo" aria-hidden="true" />
             <div className="doctor-card__image">
               <Image
                 src="/images/doctor-portrait.png"
-                alt="Ilustrační portrét lékařky v moderní ordinaci"
+                alt={dictionary.home.portraitAlt}
                 fill
                 sizes="(max-width: 800px) 92vw, 46vw"
                 loading="eager"
               />
             </div>
-            <p>Ilustrační fotografie</p>
+            <p>{dictionary.home.illustrativePhoto}</p>
           </Reveal>
 
           <div className="why-copy">
             <Reveal>
-              <h2 className="display-heading">Proč si vybrat nás</h2>
+              <h2 className="display-heading">{dictionary.home.reasonsTitle}</h2>
             </Reveal>
             <div className="reason-list">
-              {reasons.map((reason, index) => (
+              {dictionary.home.reasons.map((reason, index) => (
                 <Reveal className="reason" delay={index * 0.07} key={reason}>
                   <span className="reason__mark" aria-hidden="true">✦</span>
                   <h3>{reason}</h3>
@@ -88,17 +83,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="sluzby" className="section section--services">
+      <section id={serviceSectionIds[locale]} className="section section--services">
         <div className="shell">
           <Reveal className="section-intro">
             <div>
-              <h2 className="display-heading">Služby naší ordinace</h2>
+              <h2 className="display-heading">{dictionary.home.servicesTitle}</h2>
             </div>
           </Reveal>
 
           <div className="services-grid">
-            {siteConfig.services.map((service, index) => (
-              <Reveal className="service-card" delay={(index % 3) * 0.07} key={service.title}>
+            {serviceDefinitions.map((service, index) => (
+              <Reveal className="service-card" delay={(index % 3) * 0.07} key={service.id}>
                 <span className="service-card__icon">
                   <Image
                     className="service-icon service-icon--image"
@@ -107,7 +102,7 @@ export default function HomePage() {
                     alt=""
                   />
                 </span>
-                <h3>{service.title}</h3>
+                <h3>{dictionary.home.services[index]}</h3>
                 <span className="service-card__line" aria-hidden="true" />
               </Reveal>
             ))}
@@ -118,24 +113,16 @@ export default function HomePage() {
       <section className="section section--private-care">
         <div className="shell private-care-grid">
           <Reveal className="private-care-title">
-            <h2 className="display-heading">Privátní gynekologická péče</h2>
+            <h2 className="display-heading">{dictionary.home.privateCareTitle}</h2>
             <span className="editorial-mark" aria-hidden="true">L</span>
           </Reveal>
           <Reveal className="private-care-copy" delay={0.1}>
-            <p>
-              Naše ambulance funguje na principu <strong>přímé úhrady za péči</strong>, díky čemuž vám můžeme nabídnout více času, individuální přístup a péči přizpůsobenou právě vašim potřebám.
-            </p>
-            <p>
-              Věříme, že dobrá gynekologická péče není jen o samotném vyšetření. Je také o <strong>důvěře, naslouchání a pocitu bezpečí</strong>. Chceme, abyste měla prostor říct, co vás trápí, zeptat se na vše, co potřebujete, a společně s námi najít řešení, které vám bude dávat smysl.
-            </p>
-            <p>
-              Aktuální ceník našich služeb najdete <Link className="text-link" href="/cenik">zde</Link>.
-            </p>
+            <LocalizedRichText locale={locale} paragraphs={dictionary.home.privateCare} />
           </Reveal>
         </div>
       </section>
 
-      <BookingCta />
+      <BookingCta dictionary={dictionary} />
     </>
   );
 }
