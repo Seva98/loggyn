@@ -6,6 +6,7 @@ import "@fontsource/playfair-display/600.css";
 import "../globals.css";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { StructuredData } from "@/components/structured-data";
 import { getDictionary } from "@/content/i18n";
 import { buildStructuredData } from "@/i18n/metadata";
 
@@ -17,12 +18,12 @@ export const viewport: Viewport = {
 
 export default function CzechLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const dictionary = getDictionary("cs");
-  const structuredData = buildStructuredData(dictionary);
+  const structuredData = buildStructuredData("cs", dictionary);
 
   return (
     <html lang="cs" data-theme="light" data-background="editorial" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+        <StructuredData data={structuredData} />
       </head>
       <body>
         <a className="skip-link" href="#main-content">{dictionary.accessibility.skipToContent}</a>

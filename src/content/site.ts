@@ -18,13 +18,20 @@ export interface ProfessionalSociety {
 }
 
 export const siteConfig = {
+  url: "https://loggyn.cz",
   name: "Loggyn",
   legalName: "Loggyn – Logan Gynekologie",
   doctorName: "MUDr. Aneta Logan",
+  logoPath: "/logo.svg",
+  socialImagePath: "/images/hero-roses-v2.jpg",
   bookingUrl: "https://aneta-logan.reservio.com",
   contact: {
     address: "Skrétova 47",
     city: "301 00 Plzeň",
+    locality: "Plzeň",
+    postalCode: "301 00",
+    region: "Plzeňský kraj",
+    countryCode: "CZ",
     mapEmbedUrl:
       "https://www.google.com/maps?q=Skr%C3%A9tova%2047%2C%20301%2000%20Plze%C5%88&z=16&output=embed",
     mapExternalUrl: "https://www.google.com/maps/search/?api=1&query=Skr%C3%A9tova%2047%2C%20301%2000%20Plze%C5%88",

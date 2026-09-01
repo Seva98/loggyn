@@ -6,7 +6,7 @@ import type { Locale } from "../src/content/types";
 import { validateDictionary, type TranslationIssue } from "./i18n-validator";
 
 const approvedUnchangedKeys = new Set([
-  "*:metadata.keywords[4]",
+  "*:metadata.keywords[7]",
   "*:about.doctorName",
   "*:about.career[0].period",
   "*:about.career[1].period",

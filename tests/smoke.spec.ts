@@ -181,6 +181,49 @@ test("sitemap contains every localized route and language alternates", async ({ 
   expect(xml).toContain('hreflang="x-default"');
 });
 
+test("homepage exposes local SEO metadata and linked structured data", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(page).toHaveTitle("Gynekologie Plzeň | Privátní péče – Loggyn");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "index, follow");
+  await expect(page.locator('meta[name="googlebot"]')).toHaveAttribute("content", /max-image-preview:large/);
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    "https://loggyn.cz/images/hero-roses-v2.jpg",
+  );
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
+
+  const jsonLd = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) => (
+    scripts.flatMap((script) => {
+      const parsed = JSON.parse(script.textContent ?? "{}");
+      return Array.isArray(parsed["@graph"]) ? parsed["@graph"] : [parsed];
+    })
+  ));
+
+  const clinic = jsonLd.find((item) => item["@type"] === "MedicalClinic");
+  expect(clinic).toMatchObject({
+    "@id": "https://loggyn.cz/#clinic",
+    name: "Loggyn – Logan Gynekologie",
+    address: {
+      addressLocality: "Plzeň",
+      addressRegion: "Plzeňský kraj",
+      postalCode: "301 00",
+      addressCountry: "CZ",
+    },
+  });
+  expect(jsonLd.some((item) => item["@type"] === "Person")).toBe(true);
+  expect(jsonLd.some((item) => item["@type"] === "WebSite")).toBe(true);
+  expect(jsonLd.some((item) => item["@type"] === "WebPage")).toBe(true);
+});
+
+test("robots allows crawling and advertises the sitemap", async ({ request }) => {
+  const response = await request.get("/robots.txt");
+  expect(response.ok()).toBe(true);
+  const text = await response.text();
+  expect(text).toContain("User-Agent: *\nAllow: /");
+  expect(text).toContain("Sitemap: https://loggyn.cz/sitemap.xml");
+});
+
 test("unsupported localized slugs return 404", async ({ page }) => {
   const response = await page.goto("/en/o-nas");
   expect(response?.status()).toBe(404);

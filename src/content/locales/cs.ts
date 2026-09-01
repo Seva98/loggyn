@@ -3,23 +3,32 @@ import type { Dictionary } from "@/content/types";
 export const cs = {
   metadata: {
     clinicDescription: "Privátní gynekologická péče v Plzni.",
-    keywords: ["gynekologie Plzeň", "soukromá gynekologie", "ultrazvuk", "menopauza", "Loggyn"],
+    keywords: [
+      "gynekologie Plzeň",
+      "gynekolog Plzeň",
+      "gynekologická ambulance Plzeň",
+      "soukromá gynekologie Plzeň",
+      "gynekologické vyšetření Plzeň",
+      "ultrazvuk Plzeň",
+      "menopauza",
+      "Loggyn",
+    ],
     imageAlt: "Růže v barvách značky Loggyn",
     pages: {
       home: {
-        title: "Loggyn | Privátní gynekologická péče v Plzni",
+        title: "Gynekologie Plzeň | Privátní péče – Loggyn",
         description: "Citlivá a odborná privátní gynekologická péče s individuálním přístupem v každé fázi života ženy.",
       },
       about: {
-        title: "O nás | Loggyn",
+        title: "MUDr. Aneta Logan | Gynekologie Plzeň – Loggyn",
         description: "Poznejte lékařku Loggyn, její profesní cestu, certifikace a přístup k péči o ženy.",
       },
       pricing: {
-        title: "Ceník | Loggyn",
+        title: "Ceník | Gynekologie Plzeň – Loggyn",
         description: "Aktuální ceník privátní gynekologické a estetické péče Loggyn.",
       },
       contact: {
-        title: "Kontakt | Loggyn",
+        title: "Kontakt | Gynekologie Plzeň – Loggyn",
         description: "Online objednání, ordinační doba a mapa privátní gynekologické ambulance Loggyn v Plzni.",
       },
     },

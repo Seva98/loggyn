@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/content/site";
 import type { PageId } from "@/content/types";
 import { getLanguageAlternates, localizedRoutes, locales } from "@/i18n/routing";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://loggyn.cz";
+  const baseUrl = siteConfig.url;
   const pages: PageId[] = ["home", "about", "pricing", "contact"];
 
   return locales.flatMap((locale) => pages.map((page) => ({

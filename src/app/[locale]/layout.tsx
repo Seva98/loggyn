@@ -7,6 +7,7 @@ import "@fontsource/playfair-display/600.css";
 import "../globals.css";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { StructuredData } from "@/components/structured-data";
 import { getDictionary } from "@/content/i18n";
 import { buildStructuredData } from "@/i18n/metadata";
 import { isTranslatedLocale, localeDetails, translatedLocales } from "@/i18n/routing";
@@ -26,12 +27,12 @@ export default async function LocalizedLayout(props: LayoutProps<"/[locale]">) {
   if (!isTranslatedLocale(locale)) notFound();
 
   const dictionary = getDictionary(locale);
-  const structuredData = buildStructuredData(dictionary);
+  const structuredData = buildStructuredData(locale, dictionary);
 
   return (
     <html lang={localeDetails[locale].htmlLang} data-theme="light" data-background="editorial" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+        <StructuredData data={structuredData} />
       </head>
       <body>
         <a className="skip-link" href="#main-content">{dictionary.accessibility.skipToContent}</a>

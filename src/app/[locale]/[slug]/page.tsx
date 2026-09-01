@@ -3,9 +3,10 @@ import { notFound } from "next/navigation";
 import { AboutPage } from "@/components/pages/about-page";
 import { ContactPage } from "@/components/pages/contact-page";
 import { PricingPage } from "@/components/pages/pricing-page";
+import { StructuredData } from "@/components/structured-data";
 import { getDictionary } from "@/content/i18n";
 import type { PageId } from "@/content/types";
-import { buildPageMetadata } from "@/i18n/metadata";
+import { buildPageMetadata, buildPageStructuredData } from "@/i18n/metadata";
 import {
   getPageIdForLocalizedSlug,
   isTranslatedLocale,
@@ -46,5 +47,10 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     pricing: <PricingPage dictionary={dictionary} />,
     contact: <ContactPage dictionary={dictionary} />,
   };
-  return pages[page];
+  return (
+    <>
+      <StructuredData data={buildPageStructuredData(locale, page, dictionary)} />
+      {pages[page]}
+    </>
+  );
 }

@@ -3,7 +3,16 @@ import type { Dictionary } from "@/content/types";
 export const de = {
   metadata: {
     clinicDescription: "Private gynäkologische Betreuung in Plzeň.",
-    keywords: ["Gynäkologie Plzeň", "private Gynäkologie", "Ultraschall", "Menopause", "Loggyn"],
+    keywords: [
+      "Gynäkologie Plzeň",
+      "Frauenärztin Plzeň",
+      "gynäkologische Praxis Plzeň",
+      "private Gynäkologie Plzeň",
+      "gynäkologische Untersuchung Plzeň",
+      "Ultraschall Plzeň",
+      "Menopause",
+      "Loggyn",
+    ],
     imageAlt: "Rosen in den Markenfarben von Loggyn",
     pages: {
       home: {
