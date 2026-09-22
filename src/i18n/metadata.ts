@@ -39,7 +39,7 @@ export function buildPageMetadata(locale: Locale, page: PageId, dictionary: Dict
       },
     },
     icons: {
-      icon: [{ url: siteConfig.logoPath, type: "image/svg+xml" }],
+      icon: [{ url: siteConfig.faviconPath, type: "image/svg+xml" }],
     },
     alternates: {
       canonical: getLocalizedPath(locale, page),

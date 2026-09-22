@@ -66,12 +66,10 @@ export interface Dictionary {
     mapTitle: string;
     openMaps: string;
     mosaicLabel: string;
-    portraitAlt: string;
-    rosesAlt: string;
-    flowersAlt: string;
-    careWord: string;
-    trustWord: string;
-    socialPlaceholder: string;
+    instagramTrainingAlt: string;
+    instagramConferenceAlt: string;
+    instagramClinicAlt: string;
+    instagramLabel: string;
     rights: string;
     madeBy: string;
   };
@@ -79,6 +77,7 @@ export interface Dictionary {
     heroKicker: string;
     heroTitle: string;
     heroSubtitle: string;
+    heroAnnouncement: string;
     heroBooking: string;
     discover: string;
     discoverLabel: string;
@@ -88,6 +87,7 @@ export interface Dictionary {
     reasons: string[];
     servicesTitle: string;
     services: string[];
+    comingSoon: string;
     privateCareTitle: string;
     privateCare: RichParagraph[];
   };

@@ -238,7 +238,13 @@ export function Header({ locale, dictionary }: { locale: Locale; dictionary: Dic
           aria-label={dictionary.accessibility.brandHome}
           onClick={handleHomeClick}
         >
-          <Image src="/logo.svg" alt="Loggyn" width={719} height={448} priority />
+          <Image
+            src={siteConfig.logoPath}
+            alt={siteConfig.name}
+            width={719}
+            height={448}
+            preload
+          />
         </Link>
 
         <nav className="desktop-nav" aria-label={dictionary.accessibility.mainNavigation}>

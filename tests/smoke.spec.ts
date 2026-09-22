@@ -185,6 +185,11 @@ test("homepage exposes local SEO metadata and linked structured data", async ({ 
   await page.goto("/");
 
   await expect(page).toHaveTitle("Gynekologie Plzeň | Privátní péče – Loggyn");
+  await expect(page.locator(".brand img")).toHaveAttribute("src", /logo\.svg/);
+  await expect(page.locator('link[rel="icon"]')).toHaveAttribute(
+    "href",
+    "/graphic/favicon_24x24px.svg",
+  );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "index, follow");
   await expect(page.locator('meta[name="googlebot"]')).toHaveAttribute("content", /max-image-preview:large/);
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
@@ -204,6 +209,11 @@ test("homepage exposes local SEO metadata and linked structured data", async ({ 
   expect(clinic).toMatchObject({
     "@id": "https://loggyn.cz/#clinic",
     name: "Loggyn – Logan Gynekologie",
+    logo: {
+      url: "https://loggyn.cz/logo.svg",
+      width: 719,
+      height: 448,
+    },
     address: {
       addressLocality: "Plzeň",
       addressRegion: "Plzeňský kraj",
@@ -214,6 +224,21 @@ test("homepage exposes local SEO metadata and linked structured data", async ({ 
   expect(jsonLd.some((item) => item["@type"] === "Person")).toBe(true);
   expect(jsonLd.some((item) => item["@type"] === "WebSite")).toBe(true);
   expect(jsonLd.some((item) => item["@type"] === "WebPage")).toBe(true);
+});
+
+test("homepage marks unavailable services as coming soon", async ({ page }) => {
+  await page.goto("/");
+
+  const unavailableServices = page.locator(".service-card--coming-soon");
+  await expect(unavailableServices).toHaveCount(5);
+  await expect(unavailableServices.locator(".service-card__status")).toHaveText([
+    "Již brzy",
+    "Již brzy",
+    "Již brzy",
+    "Již brzy",
+    "Již brzy",
+  ]);
+  await expect(unavailableServices.first().locator(".service-card__icon")).toHaveCSS("filter", "grayscale(1)");
 });
 
 test("robots allows crawling and advertises the sitemap", async ({ request }) => {

@@ -15,7 +15,7 @@ export function AboutPage({ locale, dictionary }: { locale: Locale; dictionary: 
           <Reveal className="about-portrait">
             <div className="about-portrait__frame">
               <Image
-                src="/images/doctor-portrait.png"
+                src="/images/doctor-profile.webp"
                 alt={dictionary.about.portraitAlt}
                 fill
                 sizes="(max-width: 900px) 92vw, 44vw"

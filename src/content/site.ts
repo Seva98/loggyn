@@ -23,8 +23,10 @@ export const siteConfig = {
   legalName: "Loggyn – Logan Gynekologie",
   doctorName: "MUDr. Aneta Logan",
   logoPath: "/logo.svg",
+  faviconPath: "/graphic/favicon_24x24px.svg",
   socialImagePath: "/images/hero-roses-v2.jpg",
   bookingUrl: "https://aneta-logan.reservio.com",
+  instagramUrl: "https://www.instagram.com/drlogana/",
   contact: {
     address: "Skrétova 47",
     city: "301 00 Plzeň",
@@ -38,13 +40,13 @@ export const siteConfig = {
   },
 } as const;
 
-export const serviceDefinitions: Array<{ id: string; icon: ServiceIconName }> = [
-  { id: "exam", icon: "exam" },
+export const serviceDefinitions: Array<{ id: string; icon: ServiceIconName; comingSoon?: boolean }> = [
+  { id: "exam", icon: "exam", comingSoon: true },
   { id: "ultrasound", icon: "ultrasound" },
-  { id: "cytology", icon: "cytology" },
-  { id: "contraception", icon: "contraception" },
-  { id: "menopause", icon: "menopause" },
-  { id: "firstVisit", icon: "firstVisit" },
+  { id: "cytology", icon: "cytology", comingSoon: true },
+  { id: "contraception", icon: "contraception", comingSoon: true },
+  { id: "menopause", icon: "menopause", comingSoon: true },
+  { id: "firstVisit", icon: "firstVisit", comingSoon: true },
   { id: "breast", icon: "breast" },
   { id: "botox", icon: "botox" },
   { id: "filler", icon: "filler" },

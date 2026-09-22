@@ -40,6 +40,7 @@ export function HomePage({ locale, dictionary }: { locale: Locale; dictionary: D
               <span>{dictionary.home.heroTitle}</span>
               <em>{dictionary.home.heroSubtitle}</em>
             </h1>
+            <p className="hero-announcement">{dictionary.home.heroAnnouncement}</p>
             <a className="button button--hero" href={siteConfig.bookingUrl} target="_blank" rel="noreferrer">
               {dictionary.home.heroBooking}
             </a>
@@ -57,7 +58,7 @@ export function HomePage({ locale, dictionary }: { locale: Locale; dictionary: D
             <div className="doctor-card__halo" aria-hidden="true" />
             <div className="doctor-card__image">
               <Image
-                src="/images/doctor-portrait.png"
+                src="/images/doctor-profile.webp"
                 alt={dictionary.home.portraitAlt}
                 fill
                 sizes="(max-width: 800px) 92vw, 46vw"
@@ -93,7 +94,11 @@ export function HomePage({ locale, dictionary }: { locale: Locale; dictionary: D
 
           <div className="services-grid">
             {serviceDefinitions.map((service, index) => (
-              <Reveal className="service-card" delay={(index % 3) * 0.07} key={service.id}>
+              <Reveal
+                className={`service-card${service.comingSoon ? " service-card--coming-soon" : ""}`}
+                delay={(index % 3) * 0.07}
+                key={service.id}
+              >
                 <span className="service-card__icon">
                   <Image
                     className="service-icon service-icon--image"
@@ -103,6 +108,7 @@ export function HomePage({ locale, dictionary }: { locale: Locale; dictionary: D
                   />
                 </span>
                 <h3>{dictionary.home.services[index]}</h3>
+                {service.comingSoon && <p className="service-card__status">{dictionary.home.comingSoon}</p>}
                 <span className="service-card__line" aria-hidden="true" />
               </Reveal>
             ))}

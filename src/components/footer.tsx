@@ -52,20 +52,19 @@ export function Footer({ locale, dictionary }: { locale: Locale; dictionary: Dic
 
         <div className="footer-column footer-social">
           <div className="social-mosaic" aria-label={dictionary.footer.mosaicLabel}>
-            <div className="social-tile social-tile--photo">
-              <Image src="/images/doctor-portrait.png" alt={dictionary.footer.portraitAlt} fill sizes="180px" loading="eager" />
-            </div>
-            <div className="social-tile social-tile--rose">
-              <Image src="/images/hero-roses-v2.jpg" alt={dictionary.footer.rosesAlt} fill sizes="180px" />
-            </div>
-            <div className="social-tile social-tile--quote"><span>{dictionary.footer.careWord}</span></div>
-            <div className="social-tile social-tile--line" aria-hidden="true" />
-            <div className="social-tile social-tile--rose social-tile--rose-alt">
-              <Image src="/images/hero-roses-v2.jpg" alt={dictionary.footer.flowersAlt} fill sizes="180px" />
-            </div>
-            <div className="social-tile social-tile--quote"><span>{dictionary.footer.trustWord}</span></div>
+            <a className="social-tile" href="https://www.instagram.com/p/DbMHddHgOus/?img_index=1" target="_blank" rel="noreferrer">
+              <Image src="/images/instagram-training.jpg" alt={dictionary.footer.instagramTrainingAlt} fill sizes="180px" />
+            </a>
+            <a className="social-tile" href="https://www.instagram.com/p/Da01ie4AoNZ/" target="_blank" rel="noreferrer">
+              <Image src="/images/instagram-conference.jpg" alt={dictionary.footer.instagramConferenceAlt} fill sizes="180px" />
+            </a>
+            <a className="social-tile" href="https://www.instagram.com/p/DY0DqP6gGJV/" target="_blank" rel="noreferrer">
+              <Image src="/images/instagram-clinic.jpg" alt={dictionary.footer.instagramClinicAlt} fill sizes="180px" />
+            </a>
           </div>
-          <p className="footer-placeholder">{dictionary.footer.socialPlaceholder}</p>
+          <a className="footer-instagram-link" href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">
+            {dictionary.footer.instagramLabel}
+          </a>
         </div>
       </div>
 
