@@ -100,6 +100,7 @@ export function buildStructuredData(locale: Locale, dictionary: Dictionary) {
         },
         image: absoluteUrl(siteConfig.socialImagePath),
         medicalSpecialty: "Gynecologic",
+        email: siteConfig.contact.email,
         address: {
           "@type": "PostalAddress",
           streetAddress: siteConfig.contact.address,

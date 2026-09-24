@@ -23,8 +23,9 @@ export function Footer({ locale, dictionary }: { locale: Locale; dictionary: Dic
             <span>{siteConfig.contact.address}</span>
             <span>{siteConfig.contact.city}</span>
           </address>
+          <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>
           <a href={siteConfig.bookingUrl} target="_blank" rel="noreferrer">
-            {dictionary.contact.bookingViaReservio}
+            {dictionary.contact.bookingViaReservanto}
           </a>
           <span>{dictionary.contact.hours}</span>
           <nav className="footer-links" aria-label={dictionary.footer.navigationLabel}>

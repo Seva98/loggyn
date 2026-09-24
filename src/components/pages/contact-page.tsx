@@ -3,7 +3,7 @@ import { Reveal } from "@/components/reveal";
 import { siteConfig } from "@/content/site";
 import type { Dictionary } from "@/content/types";
 
-type ContactIconName = "location" | "booking" | "hours";
+type ContactIconName = "location" | "booking" | "email" | "hours";
 
 function ContactIcon({ name }: { name: ContactIconName }) {
   return (
@@ -18,6 +18,12 @@ function ContactIcon({ name }: { name: ContactIconName }) {
         <>
           <rect x="3" y="5" width="18" height="16" rx="2" />
           <path d="M8 3v4M16 3v4M3 10h18M8 15l2.5 2.5L16 13" />
+        </>
+      )}
+      {name === "email" && (
+        <>
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="m4 7 8 6 8-6" />
         </>
       )}
       {name === "hours" && (
@@ -40,9 +46,15 @@ export function ContactPage({ dictionary }: { dictionary: Dictionary }) {
     },
     {
       label: dictionary.contact.labels.booking,
-      value: dictionary.contact.bookingViaReservio,
+      value: dictionary.contact.bookingViaReservanto,
       href: siteConfig.bookingUrl,
       icon: "booking",
+    },
+    {
+      label: dictionary.contact.labels.email,
+      value: siteConfig.contact.email,
+      href: `mailto:${siteConfig.contact.email}`,
+      icon: "email",
     },
     {
       label: dictionary.contact.labels.hours,

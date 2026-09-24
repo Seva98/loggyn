@@ -46,7 +46,7 @@ for (const route of routes) {
 test("homepage exposes all nine services and safe booking links", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator(".service-card")).toHaveCount(9);
-  await expect(page.getByText("Přijímáme nové pacientky")).toHaveCount(0);
+  await expect(page.getByText("Přijímáme nové pacientky!", { exact: true })).toBeVisible();
 
   const headline = page.locator(".hero-home h1 > span");
   await expect(headline).toHaveText("Citlivě. Odborně. Přirozeně.");
@@ -57,7 +57,7 @@ test("homepage exposes all nine services and safe booking links", async ({ page 
   expect(headlineFit).toEqual({ fits: true, whiteSpace: "nowrap" });
 
   const booking = page.getByRole("link", { name: /Rezervace termínu/i }).first();
-  await expect(booking).toHaveAttribute("href", "https://aneta-logan.reservio.com");
+  await expect(booking).toHaveAttribute("href", "http://www.reservanto.cz/?mid=25514");
   await expect(booking).toHaveAttribute("target", "_blank");
 });
 
@@ -155,14 +155,15 @@ for (const localeRoutes of [
     const main = page.getByRole("main");
     await expect(main.getByText("Skrétova 47, 301 00 Plzeň", { exact: true })).toBeVisible();
     await expect(main.locator('a[href^="tel:"]')).toHaveCount(0);
-    await expect(main.locator('a[href^="mailto:"]')).toHaveCount(0);
-    const reservioContact = main.locator('.contact-card a[href="https://aneta-logan.reservio.com"]');
-    await expect(reservioContact).toBeVisible();
-    await expect(reservioContact).toHaveAttribute("target", "_blank");
+    await expect(main.locator('a[href="mailto:log.gynekologie@gmail.com"]')).toBeVisible();
+    await expect(page.getByRole("contentinfo").locator('a[href="mailto:log.gynekologie@gmail.com"]')).toBeVisible();
+    const reservantoContact = main.locator('.contact-card a[href="http://www.reservanto.cz/?mid=25514"]');
+    await expect(reservantoContact).toBeVisible();
+    await expect(reservantoContact).toHaveAttribute("target", "_blank");
 
     await page.goto(localeRoutes.pricing);
     await expect(page.locator(".price-row")).toHaveCount(16);
-    await expect(page.getByText("6 000 Kč", { exact: true })).toHaveCount(2);
+    await expect(page.getByText("6 000 Kč", { exact: true })).toHaveCount(3);
 
     await page.goto(localeRoutes.about);
     await expect(page.locator(".membership-card")).toHaveCount(9);

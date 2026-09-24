@@ -123,9 +123,10 @@ export interface Dictionary {
     labels: {
       address: string;
       booking: string;
+      email: string;
       hours: string;
     };
-    bookingViaReservio: string;
+    bookingViaReservanto: string;
     hours: string;
     mapHeading: string;
     temporaryNotice: string;

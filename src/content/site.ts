@@ -25,9 +25,10 @@ export const siteConfig = {
   logoPath: "/logo.svg",
   faviconPath: "/graphic/favicon_24x24px.svg",
   socialImagePath: "/images/hero-roses-v2.jpg",
-  bookingUrl: "https://aneta-logan.reservio.com",
+  bookingUrl: "http://www.reservanto.cz/?mid=25514",
   instagramUrl: "https://www.instagram.com/drlogana/",
   contact: {
+    email: "log.gynekologie@gmail.com",
     address: "Skrétova 47",
     city: "301 00 Plzeň",
     locality: "Plzeň",
