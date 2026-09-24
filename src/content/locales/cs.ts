@@ -208,30 +208,22 @@ export const cs = {
   },
   pricing: {
     title: "Ceník",
+    aestheticTitle: "Estetická ošetření",
     tableLabel: "Ceník skupiny",
     groups: [
       {
         title: "Gynekologická péče",
-        description: "Cena zahrnuje čas lékařky, konzultaci a uvedená vyšetření.",
-        items: [
-          "Gynekologická konzultace včetně ultrazvukového vyšetření",
-          "Gynekologická konzultace včetně ultrazvukového vyšetření a cytologického stěru",
-          "Vyšetření těhotné pacientky",
-          "LBC",
-          "Mammasonografie",
-        ],
+        items: ["Mammasonogram"],
       },
       {
         title: "Aplikace botulotoxinu",
-        description: "Konkrétní rozsah ošetření vždy doporučíme až po osobní konzultaci.",
         items: [
           "Čelo",
           "Čelo + mračivka",
           "Mračivka (glabela)",
-          "Zvednutí obočí – obě strany",
+          "Zvednutí obočí – obě (Foxy eyes)",
           "Krčení nosu",
-          "Kolem očí – obě strany",
-          "Snížení špičky nosu",
+          "Kolem očí – obě",
           "Zvednutí špičky nosu",
           "Horní ret – zvednutí rtu, mírné zvětšení",
           "Žvýkací svaly – zúžení obličeje / bruxismus",
@@ -239,7 +231,12 @@ export const cs = {
           "Koutky úst",
           "Brada",
           "Krk – platysma",
+          "Full face",
         ],
+      },
+      {
+        title: "Kyselina hyaluronová",
+        items: ["Zvětšení rtů kyselinou hyaluronovou"],
       },
     ],
     note: "Ceník je orientační a může se měnit podle individuálního rozsahu ošetření. Přesnou cenu vždy potvrdíme před výkonem.",

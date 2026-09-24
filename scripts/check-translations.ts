@@ -14,11 +14,9 @@ const approvedUnchangedKeys = new Set([
   "*:about.certifications[0].items[0].name",
   "*:about.certifications[0].items[1].name",
   "*:about.certifications[0].items[2].name",
-  "*:pricing.groups[0].items[3]",
   "*:home.privateCare[2][1].link",
   "de:metadata.pages.contact.title",
   "de:header.navigation.contact",
-  "de:pricing.groups[0].items[4]",
   "de:contact.title",
   "de:contact.labels.phone",
 ]);

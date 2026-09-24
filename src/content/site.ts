@@ -55,26 +55,30 @@ export const serviceDefinitions: Array<{ id: string; icon: ServiceIconName; comi
 export const priceDefinitions = [
   {
     id: "gynaecology",
-    prices: ["1 200 Kč", "1 500 Kč", "1 200 Kč", "700 Kč", "900 Kč"],
+    prices: ["800 Kč"],
   },
   {
     id: "botox",
     prices: [
       "3 000 Kč",
-      "5 500 Kč",
+      "5 000 Kč",
       "3 000 Kč",
       "2 500 Kč",
       "2 500 Kč",
       "4 000 Kč",
       "2 500 Kč",
-      "2 500 Kč",
-      "2 500 Kč",
+      "2 000 Kč",
       "6 000 Kč",
       "2 500 Kč",
       "2 500 Kč",
       "2 000 Kč",
       "6 000 Kč",
+      "9 500 Kč",
     ],
+  },
+  {
+    id: "hyaluronicAcid",
+    prices: ["6 000 Kč"],
   },
 ] as const;
 

@@ -12,7 +12,6 @@ export type RichParagraph = RichTextSegment[];
 
 export interface LocalizedPriceGroup {
   title: string;
-  description: string;
   items: string[];
 }
 
@@ -114,6 +113,7 @@ export interface Dictionary {
   };
   pricing: {
     title: string;
+    aestheticTitle: string;
     groups: LocalizedPriceGroup[];
     tableLabel: string;
     note: string;

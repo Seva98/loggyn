@@ -161,7 +161,7 @@ for (const localeRoutes of [
     await expect(reservioContact).toHaveAttribute("target", "_blank");
 
     await page.goto(localeRoutes.pricing);
-    await expect(page.locator(".price-row")).toHaveCount(19);
+    await expect(page.locator(".price-row")).toHaveCount(16);
     await expect(page.getByText("6 000 Kč", { exact: true })).toHaveCount(2);
 
     await page.goto(localeRoutes.about);

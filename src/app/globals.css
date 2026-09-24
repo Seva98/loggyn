@@ -1591,6 +1591,18 @@ html[data-theme="light"] .theme-toggle__thumb {
   gap: 44px;
 }
 
+.pricing-section .display-heading {
+  font-size: clamp(2.2rem, 3.92vw, 4.2rem);
+}
+
+.price-category-title {
+  margin: 8px 0 -24px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.76rem, 3.2vw, 2.88rem);
+  font-weight: 550;
+  line-height: 1;
+}
+
 .price-group {
   display: grid;
   overflow: hidden;
@@ -1607,17 +1619,13 @@ html[data-theme="light"] .theme-toggle__thumb {
   background: linear-gradient(155deg, var(--surface-raised), var(--surface));
 }
 
-.price-group__header h2 {
-  margin: 0 0 20px;
+.price-group__header h2,
+.price-group__header h3 {
+  margin: 0;
   font-family: var(--font-serif);
-  font-size: clamp(2.1rem, 3.4vw, 3.4rem);
+  font-size: clamp(1.68rem, 2.72vw, 2.72rem);
   font-weight: 550;
   line-height: 0.96;
-}
-
-.price-group__header > p:last-child {
-  color: var(--muted);
-  font-size: 0.86rem;
 }
 
 .price-list {
@@ -1833,6 +1841,7 @@ html[data-theme="light"] .theme-toggle__thumb {
   .shell { width: min(calc(100% - 30px), var(--shell)); }
   .section { padding: 78px 0; }
   .display-heading { font-size: clamp(2.55rem, 12.7vw, 3.8rem); }
+  .pricing-section .display-heading { font-size: clamp(2.04rem, 10.16vw, 3.04rem); }
   .desktop-booking { display: none; }
   .site-header__inner { gap: 10px; }
   .brand,

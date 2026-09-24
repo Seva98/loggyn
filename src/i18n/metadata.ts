@@ -113,7 +113,7 @@ export function buildStructuredData(locale: Locale, dictionary: Dictionary) {
           name: siteConfig.contact.locality,
         },
         hasMap: siteConfig.contact.mapExternalUrl,
-        priceRange: "700–6 000 Kč",
+        priceRange: "800–9 500 Kč",
         currenciesAccepted: "CZK",
         employee: { "@id": doctorId },
         potentialAction: {

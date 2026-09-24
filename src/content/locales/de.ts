@@ -208,30 +208,22 @@ export const de = {
   },
   pricing: {
     title: "Preise",
+    aestheticTitle: "Ästhetische Behandlungen",
     tableLabel: "Preisliste für",
     groups: [
       {
         title: "Gynäkologische Betreuung",
-        description: "Der Preis umfasst die ärztliche Zeit, die Beratung und die aufgeführten Untersuchungen.",
-        items: [
-          "Gynäkologische Beratung einschließlich Ultraschalluntersuchung",
-          "Gynäkologische Beratung einschließlich Ultraschalluntersuchung und zytologischem Abstrich",
-          "Untersuchung einer schwangeren Patientin",
-          "LBC",
-          "Mammasonografie",
-        ],
+        items: ["Mammasonografie"],
       },
       {
         title: "Behandlung mit Botulinumtoxin",
-        description: "Den konkreten Behandlungsumfang empfehlen wir stets erst nach einem persönlichen Beratungsgespräch.",
         items: [
           "Stirn",
           "Stirn + Zornesfalte",
           "Zornesfalte (Glabella)",
-          "Anheben der Augenbrauen – beidseitig",
+          "Anheben der Augenbrauen – beidseitig (Foxy Eyes)",
           "Bunny Lines",
           "Augenpartie – beidseitig",
-          "Absenken der Nasenspitze",
           "Anheben der Nasenspitze",
           "Oberlippe – Lip Flip und dezente Vergrößerung",
           "Kaumuskulatur – Gesichtsverschmälerung / Bruxismus",
@@ -239,7 +231,12 @@ export const de = {
           "Mundwinkel",
           "Kinn",
           "Hals – Platysma",
+          "Ganzes Gesicht",
         ],
+      },
+      {
+        title: "Hyaluronsäure",
+        items: ["Lippenvergrößerung mit Hyaluronsäure"],
       },
     ],
     note: "Die Preise sind Richtwerte und können je nach individuellem Behandlungsumfang variieren. Den genauen Preis bestätigen wir immer vor dem Eingriff.",

@@ -208,30 +208,22 @@ export const en = {
   },
   pricing: {
     title: "Pricing",
+    aestheticTitle: "Aesthetic treatments",
     tableLabel: "Price list for",
     groups: [
       {
         title: "Gynaecological care",
-        description: "The price includes the doctor’s time, the consultation and the examinations listed.",
-        items: [
-          "Gynaecological consultation including an ultrasound examination",
-          "Gynaecological consultation including an ultrasound examination and cervical cytology",
-          "Examination during pregnancy",
-          "LBC",
-          "Breast ultrasound",
-        ],
+        items: ["Breast ultrasound (mammasonogram)"],
       },
       {
         title: "Botulinum toxin treatment",
-        description: "The exact extent of treatment will always be recommended after an in-person consultation.",
         items: [
           "Forehead",
           "Forehead + frown lines",
           "Frown lines (glabella)",
-          "Eyebrow lift – both sides",
+          "Eyebrow lift – both sides (Foxy eyes)",
           "Bunny lines",
           "Around the eyes – both sides",
-          "Lowering the tip of the nose",
           "Lifting the tip of the nose",
           "Upper lip – lip flip and subtle enhancement",
           "Masseter muscles – facial slimming / bruxism",
@@ -239,7 +231,12 @@ export const en = {
           "Corners of the mouth",
           "Chin",
           "Neck – platysma",
+          "Full-face treatment",
         ],
+      },
+      {
+        title: "Hyaluronic acid",
+        items: ["Lip augmentation with hyaluronic acid"],
       },
     ],
     note: "Prices are indicative and may vary according to the individual extent of treatment. We will always confirm the exact price before the procedure.",
