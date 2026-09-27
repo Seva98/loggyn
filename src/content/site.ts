@@ -25,7 +25,7 @@ export const siteConfig = {
   logoPath: "/logo.svg",
   faviconPath: "/graphic/favicon_24x24px.svg",
   socialImagePath: "/images/hero-roses-v2.jpg",
-  bookingUrl: "http://www.reservanto.cz/?mid=25514",
+  bookingUrl: "https://booking.reservanto.cz/Modal/?id=25514",
   instagramUrl: "https://www.instagram.com/drlogana/",
   contact: {
     email: "log.gynekologie@gmail.com",

@@ -57,7 +57,7 @@ test("homepage exposes all nine services and safe booking links", async ({ page 
   expect(headlineFit).toEqual({ fits: true, whiteSpace: "nowrap" });
 
   const booking = page.getByRole("link", { name: /Rezervace termínu/i }).first();
-  await expect(booking).toHaveAttribute("href", "http://www.reservanto.cz/?mid=25514");
+  await expect(booking).toHaveAttribute("href", "https://booking.reservanto.cz/Modal/?id=25514");
   await expect(booking).toHaveAttribute("target", "_blank");
 });
 
@@ -157,7 +157,7 @@ for (const localeRoutes of [
     await expect(main.locator('a[href^="tel:"]')).toHaveCount(0);
     await expect(main.locator('a[href="mailto:log.gynekologie@gmail.com"]')).toBeVisible();
     await expect(page.getByRole("contentinfo").locator('a[href="mailto:log.gynekologie@gmail.com"]')).toBeVisible();
-    const reservantoContact = main.locator('.contact-card a[href="http://www.reservanto.cz/?mid=25514"]');
+    const reservantoContact = main.locator('.contact-card a[href="https://booking.reservanto.cz/Modal/?id=25514"]');
     await expect(reservantoContact).toBeVisible();
     await expect(reservantoContact).toHaveAttribute("target", "_blank");
 
