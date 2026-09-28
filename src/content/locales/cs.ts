@@ -210,10 +210,11 @@ export const cs = {
     title: "Ceník",
     aestheticTitle: "Estetická ošetření",
     tableLabel: "Ceník skupiny",
+    fromPrice: "od",
     groups: [
       {
         title: "Gynekologická péče",
-        items: ["Mammasonogram"],
+        items: ["Sonografie prsu"],
       },
       {
         title: "Aplikace botulotoxinu",

@@ -116,6 +116,7 @@ export interface Dictionary {
     aestheticTitle: string;
     groups: LocalizedPriceGroup[];
     tableLabel: string;
+    fromPrice: string;
     note: string;
   };
   contact: {

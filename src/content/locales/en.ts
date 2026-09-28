@@ -210,10 +210,11 @@ export const en = {
     title: "Pricing",
     aestheticTitle: "Aesthetic treatments",
     tableLabel: "Price list for",
+    fromPrice: "from",
     groups: [
       {
         title: "Gynaecological care",
-        items: ["Breast ultrasound (mammasonogram)"],
+        items: ["Breast ultrasound"],
       },
       {
         title: "Botulinum toxin treatment",

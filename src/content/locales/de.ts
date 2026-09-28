@@ -210,10 +210,11 @@ export const de = {
     title: "Preise",
     aestheticTitle: "Ästhetische Behandlungen",
     tableLabel: "Preisliste für",
+    fromPrice: "ab",
     groups: [
       {
         title: "Gynäkologische Betreuung",
-        items: ["Mammasonografie"],
+        items: ["Brustultraschall"],
       },
       {
         title: "Behandlung mit Botulinumtoxin",

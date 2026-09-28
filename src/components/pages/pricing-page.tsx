@@ -24,7 +24,10 @@ export function PricingPage({ dictionary }: { dictionary: Dictionary }) {
                     <div className="price-row" role="row" key={item}>
                       <span className="price-row__number" aria-hidden="true">✦</span>
                       <span role="cell" className="price-row__name">{item}</span>
-                      <strong role="cell" className="price-row__price">{priceDefinitions[groupIndex].prices[itemIndex]}</strong>
+                      <strong role="cell" className="price-row__price">
+                        {priceDefinitions[groupIndex].id === "botox" && `${dictionary.pricing.fromPrice} `}
+                        {priceDefinitions[groupIndex].prices[itemIndex]}
+                      </strong>
                     </div>
                   ))}
                 </div>
