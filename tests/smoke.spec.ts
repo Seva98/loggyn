@@ -57,7 +57,7 @@ test("homepage exposes all nine services and safe booking links", async ({ page 
   expect(headlineFit).toEqual({ fits: true, whiteSpace: "nowrap" });
 
   const booking = page.getByRole("link", { name: /Rezervace termínu/i }).first();
-  await expect(booking).toHaveAttribute("href", "https://booking.reservanto.cz/Modal/?id=25514");
+  await expect(booking).toHaveAttribute("href", "https://aneta-logan.reservio.com/");
   await expect(booking).toHaveAttribute("target", "_blank");
 });
 
@@ -157,9 +157,9 @@ for (const localeRoutes of [
     await expect(main.locator('a[href^="tel:"]')).toHaveCount(0);
     await expect(main.locator('a[href="mailto:log.gynekologie@gmail.com"]')).toBeVisible();
     await expect(page.getByRole("contentinfo").locator('a[href="mailto:log.gynekologie@gmail.com"]')).toBeVisible();
-    const reservantoContact = main.locator('.contact-card a[href="https://booking.reservanto.cz/Modal/?id=25514"]');
-    await expect(reservantoContact).toBeVisible();
-    await expect(reservantoContact).toHaveAttribute("target", "_blank");
+    const bookingContact = main.locator('.contact-card a[href="https://aneta-logan.reservio.com/"]');
+    await expect(bookingContact).toBeVisible();
+    await expect(bookingContact).toHaveAttribute("target", "_blank");
 
     await page.goto(localeRoutes.pricing);
     await expect(page.locator(".price-row")).toHaveCount(16);
