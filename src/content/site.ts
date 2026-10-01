@@ -43,7 +43,7 @@ export const siteConfig = {
 
 export const serviceDefinitions: Array<{ id: string; icon: ServiceIconName; comingSoon?: boolean }> = [
   { id: "exam", icon: "exam", comingSoon: true },
-  { id: "ultrasound", icon: "ultrasound" },
+  { id: "ultrasound", icon: "ultrasound", comingSoon: true },
   { id: "cytology", icon: "cytology", comingSoon: true },
   { id: "contraception", icon: "contraception", comingSoon: true },
   { id: "menopause", icon: "menopause", comingSoon: true },

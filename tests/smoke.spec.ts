@@ -231,8 +231,9 @@ test("homepage marks unavailable services as coming soon", async ({ page }) => {
   await page.goto("/");
 
   const unavailableServices = page.locator(".service-card--coming-soon");
-  await expect(unavailableServices).toHaveCount(5);
+  await expect(unavailableServices).toHaveCount(6);
   await expect(unavailableServices.locator(".service-card__status")).toHaveText([
+    "Již brzy",
     "Již brzy",
     "Již brzy",
     "Již brzy",
