@@ -40,13 +40,13 @@ export function ContactPage({ dictionary }: { dictionary: Dictionary }) {
   const contactCards: Array<{ label: string; value: string; href?: string; icon: ContactIconName }> = [
     {
       label: dictionary.contact.labels.address,
-      value: `${siteConfig.contact.address}, ${siteConfig.contact.city}`,
+      value: `${siteConfig.contact.address}, ${siteConfig.contact.city}, ${dictionary.contact.floor}`,
       href: siteConfig.contact.mapExternalUrl,
       icon: "location",
     },
     {
       label: dictionary.contact.labels.booking,
-      value: dictionary.contact.bookingViaReservanto,
+      value: dictionary.contact.bookingViaReservio,
       href: siteConfig.bookingUrl,
       icon: "booking",
     },

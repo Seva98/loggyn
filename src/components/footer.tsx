@@ -22,12 +22,14 @@ export function Footer({ locale, dictionary }: { locale: Locale; dictionary: Dic
           <address>
             <span>{siteConfig.contact.address}</span>
             <span>{siteConfig.contact.city}</span>
+            <span>{dictionary.contact.floor}</span>
           </address>
           <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>
           <a href={siteConfig.bookingUrl} target="_blank" rel="noreferrer">
-            {dictionary.contact.bookingViaReservanto}
+            {dictionary.contact.bookingViaReservio}
           </a>
           <span>{dictionary.contact.hours}</span>
+          <span>{`${dictionary.contact.labels.registrationNumber}: ${siteConfig.contact.registrationNumber}`}</span>
           <nav className="footer-links" aria-label={dictionary.footer.navigationLabel}>
             {navigation.map((item) => (
               <Link key={item.href} href={item.href}>

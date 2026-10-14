@@ -126,8 +126,10 @@ export interface Dictionary {
       booking: string;
       email: string;
       hours: string;
+      registrationNumber: string;
     };
-    bookingViaReservanto: string;
+    floor: string;
+    bookingViaReservio: string;
     hours: string;
     mapHeading: string;
     temporaryNotice: string;

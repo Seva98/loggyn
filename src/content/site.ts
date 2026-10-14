@@ -28,7 +28,8 @@ export const siteConfig = {
   bookingUrl: "https://aneta-logan.reservio.com/",
   instagramUrl: "https://www.instagram.com/drlogana/",
   contact: {
-    email: "log.gynekologie@gmail.com",
+    email: "loggyn.cz@gmail.com",
+    registrationNumber: "29789869",
     address: "Skrétova 47",
     city: "301 00 Plzeň",
     locality: "Plzeň",

@@ -145,18 +145,18 @@ test("mobile header keeps the flag selector available and exposes localized navi
 });
 
 for (const localeRoutes of [
-  { contact: "/kontakt", pricing: "/cenik", about: "/o-nas" },
-  { contact: "/en/contact", pricing: "/en/pricing", about: "/en/about" },
-  { contact: "/de/kontakt", pricing: "/de/preise", about: "/de/ueber-uns" },
-  { contact: "/uk/kontakty", pricing: "/uk/tsiny", about: "/uk/pro-nas" },
+  { contact: "/kontakt", pricing: "/cenik", about: "/o-nas", floor: "4. patro" },
+  { contact: "/en/contact", pricing: "/en/pricing", about: "/en/about", floor: "4th floor" },
+  { contact: "/de/kontakt", pricing: "/de/preise", about: "/de/ueber-uns", floor: "4. Stock" },
+  { contact: "/uk/kontakty", pricing: "/uk/tsiny", about: "/uk/pro-nas", floor: "4-й поверх" },
 ]) {
   test(`${localeRoutes.contact} preserves factual clinic data`, async ({ page }) => {
     await page.goto(localeRoutes.contact);
     const main = page.getByRole("main");
-    await expect(main.getByText("Skrétova 47, 301 00 Plzeň", { exact: true })).toBeVisible();
+    await expect(main.getByText(`Skrétova 47, 301 00 Plzeň, ${localeRoutes.floor}`, { exact: true })).toBeVisible();
     await expect(main.locator('a[href^="tel:"]')).toHaveCount(0);
-    await expect(main.locator('a[href="mailto:log.gynekologie@gmail.com"]')).toBeVisible();
-    await expect(page.getByRole("contentinfo").locator('a[href="mailto:log.gynekologie@gmail.com"]')).toBeVisible();
+    await expect(main.locator('a[href="mailto:loggyn.cz@gmail.com"]')).toBeVisible();
+    await expect(page.getByRole("contentinfo").locator('a[href="mailto:loggyn.cz@gmail.com"]')).toBeVisible();
     const bookingContact = main.locator('.contact-card a[href="https://aneta-logan.reservio.com/"]');
     await expect(bookingContact).toBeVisible();
     await expect(bookingContact).toHaveAttribute("target", "_blank");
